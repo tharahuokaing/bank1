@@ -346,3 +346,23 @@ body {
   from { background-position: 0 0, 0 0, 0 0, 0 0; }
   to { background-position: 100px 100px, 100px 100px, 100px 100px, 100px 100px; }
 }
+
+/* =========================================================
+   INSTITUTIONAL BRAND LOGO PRESENTATION LAYER
+========================================================= */
+
+.bank-logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.bank-logo-img {
+    max-width: 150px;       /* Safely restricts the maximum width */
+    height: auto;           /* Automatically maintains the image's original aspect ratio */
+    border-radius: 8px;     /* Smooths out sharp image corners */
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Premium metallic border accent */
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15); /* Soft backlighting aura effect */
+}
