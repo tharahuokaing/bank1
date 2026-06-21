@@ -13,7 +13,6 @@ CONFIGURATION
 
 const AUTH = {
 
-```
 sessionKey: "HTB_SESSION",
 
 loginAttemptsKey: "HTB_LOGIN_ATTEMPTS",
@@ -23,7 +22,6 @@ maxAttempts: 5,
 lockDuration: 5 * 60 * 1000,
 
 sessionTimeout: 30 * 60 * 1000
-```
 
 };
 
@@ -34,7 +32,6 @@ Replace with API / Database later
 
 const USERS = [
 
-```
 {
     username: "huokaingthara",
     password: "dutyfree",
@@ -62,7 +59,6 @@ const USERS = [
     role: "staff",
     requires2FA: false
 }
-```
 
 ];
 
@@ -72,7 +68,6 @@ AUDIT LOGGING
 
 function auditLog(action) {
 
-```
 const timestamp = new Date().toISOString();
 
 console.log(
@@ -93,7 +88,6 @@ entry.textContent =
     `${timestamp} | ${action}`;
 
 auditContainer.prepend(entry);
-```
 
 }
 
@@ -103,7 +97,6 @@ ATTEMPT MANAGEMENT
 
 function getAttemptData() {
 
-```
 return JSON.parse(
     localStorage.getItem(
         AUTH.loginAttemptsKey
@@ -113,34 +106,28 @@ return JSON.parse(
     count: 0,
     lockedUntil: null
 };
-```
 
 }
 
 function saveAttemptData(data) {
 
-```
 localStorage.setItem(
     AUTH.loginAttemptsKey,
     JSON.stringify(data)
 );
-```
 
 }
 
 function clearAttempts() {
 
-```
 localStorage.removeItem(
     AUTH.loginAttemptsKey
 );
-```
 
 }
 
 function isLocked() {
 
-```
 const data = getAttemptData();
 
 if (!data.lockedUntil)
@@ -154,7 +141,6 @@ if (Date.now() > data.lockedUntil) {
 }
 
 return true;
-```
 
 }
 
@@ -164,12 +150,10 @@ TOKEN GENERATOR
 
 function generateToken() {
 
-```
 return btoa(
     crypto.randomUUID() +
     Date.now()
 );
-```
 
 }
 
@@ -182,7 +166,6 @@ username,
 password
 ) {
 
-```
 const msg =
     document.getElementById(
         "loginMessage"
@@ -274,7 +257,6 @@ if (
 }
 
 createSession(user);
-```
 
 }
 
@@ -284,7 +266,6 @@ SESSION
 
 function createSession(user) {
 
-```
 const session = {
 
     username:
@@ -308,7 +289,6 @@ sessionStorage.setItem(
 );
 
 showDashboard(session);
-```
 
 }
 
@@ -318,7 +298,6 @@ SESSION RESTORE
 
 function getSession() {
 
-```
 const raw =
     sessionStorage.getItem(
         AUTH.sessionKey
@@ -335,13 +314,11 @@ try {
 
     return null;
 }
-```
 
 }
 
 function restoreSession() {
 
-```
 const session =
     getSession();
 
@@ -377,7 +354,6 @@ DASHBOARD
 
 function showDashboard(session) {
 
-```
 const loginContainer =
     document.getElementById(
         "loginContainer"
@@ -421,7 +397,6 @@ if (
         session.role
     );
 }
-```
 
 }
 
@@ -433,7 +408,6 @@ function initializeDashboard(
 session
 ) {
 
-```
 const assets =
     document.getElementById(
         "assetValue"
@@ -473,7 +447,6 @@ if (capital)
 auditLog(
     `DASHBOARD LOADED | ${session.username}`
 );
-```
 
 }
 
@@ -483,7 +456,6 @@ PHASE RENDERING
 
 function renderPhaseList(role) {
 
-```
 const list =
     document.getElementById(
         "phasesList"
@@ -526,7 +498,6 @@ PhaseRegistry
 
         list.appendChild(li);
     });
-```
 
 }
 
@@ -536,7 +507,6 @@ LOGOUT
 
 function logout() {
 
-```
 sessionStorage.removeItem(
     AUTH.sessionKey
 );
@@ -544,7 +514,6 @@ sessionStorage.removeItem(
 auditLog("LOGOUT");
 
 location.reload();
-```
 
 }
 
@@ -556,7 +525,6 @@ document.addEventListener(
 "DOMContentLoaded",
 () => {
 
-```
     const form =
         document.getElementById(
             "loginForm"
@@ -594,7 +562,6 @@ document.addEventListener(
 
     restoreSession();
 }
-```
 
 );
 
