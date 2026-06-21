@@ -165,3 +165,107 @@
   document.addEventListener("DOMContentLoaded", boot);
 
 })();
+
+function loadDashboard() {
+
+    document.getElementById("dashboardContainer").style.display = "block";
+
+    document.getElementById("accountCount").textContent = "1,254";
+
+    document.getElementById("depositTotal").textContent =
+        "$25,400,000";
+
+    document.getElementById("txCount").textContent =
+        "4,862";
+
+    showModule("accounts");
+}
+
+function showModule(module) {
+
+    const content =
+        document.getElementById("moduleContent");
+
+    switch(module){
+
+        case "accounts":
+
+            content.innerHTML = `
+                <h3>Customer Accounts</h3>
+
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Balance</th>
+                    </tr>
+
+                    <tr>
+                        <td>1001</td>
+                        <td>Huokaing Thara</td>
+                        <td>$500,000</td>
+                    </tr>
+
+                    <tr>
+                        <td>1002</td>
+                        <td>Corporate Demo</td>
+                        <td>$2,000,000</td>
+                    </tr>
+
+                </table>
+            `;
+            break;
+
+        case "transfers":
+
+            content.innerHTML = `
+                <h3>Transfer Center</h3>
+
+                <input placeholder="From Account">
+
+                <input placeholder="To Account">
+
+                <input placeholder="Amount">
+
+                <button>
+                    Transfer
+                </button>
+            `;
+            break;
+
+        case "customers":
+
+            content.innerHTML = `
+                <h3>Customer Registry</h3>
+
+                <ul>
+                    <li>Retail Customers</li>
+                    <li>Corporate Customers</li>
+                    <li>VIP Customers</li>
+                </ul>
+            `;
+            break;
+
+        case "risk":
+
+            content.innerHTML = `
+                <h3>Risk Monitoring</h3>
+
+                <p style="color:lime;">
+                    Risk Level: LOW
+                </p>
+            `;
+            break;
+
+        case "phases":
+
+            content.innerHTML = `
+                <h3>Bank Development Phases</h3>
+
+                <ol id="phasesList"></ol>
+            `;
+
+            showPhasesList();
+            break;
+    }
+}
