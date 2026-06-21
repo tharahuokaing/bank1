@@ -1,6 +1,7 @@
 /* =========================================================
-HUOKAING THARA BANK
-Enterprise Authentication Controller v6
+   HUOKAING THARA BANKING SYSTEM
+   AUTHENTICATION CONTROLLER v5
+   Enterprise Dashboard Edition
 ========================================================= */
 
 (() => {
@@ -8,26 +9,22 @@ Enterprise Authentication Controller v6
 "use strict";
 
 /* =========================================================
-CONFIGURATION
+   CONFIGURATION
 ========================================================= */
 
-const AUTH = {
+const CONFIG = {
+    SESSION_KEY: "HT_SESSION",
+    ATTEMPT_KEY: "HT_ATTEMPTS",
 
-sessionKey: "HTB_SESSION",
+    MAX_ATTEMPTS: 5,
 
-loginAttemptsKey: "HTB_LOGIN_ATTEMPTS",
+    LOCKOUT_MINUTES: 5,
 
-maxAttempts: 5,
-
-lockDuration: 5 * 60 * 1000,
-
-sessionTimeout: 30 * 60 * 1000
-
+    SESSION_TIMEOUT_MINUTES: 30
 };
 
 /* =========================================================
-MOCK USER DATABASE
-Replace with API / Database later
+   USERS
 ========================================================= */
 
 const USERS = [
@@ -35,550 +32,496 @@ const USERS = [
 {
     username: "huokaingthara",
     password: "dutyfree",
-    role: "cybersecurity",
+    role: "Cybersecurity",
     requires2FA: false
 },
 
 {
-    username: "admin",
+    username: "svaymetrey",
     password: "dutyfree",
-    role: "administrator",
+    role: "Administrator",
+    requires2FA: false
+},
+
+{
+    username: "chornrothanak",
+    password: "dutyfree",
+    role: "Administrator",
     requires2FA: true
 },
 
 {
     username: "auditor",
     password: "auditor123",
-    role: "auditor",
+    role: "Auditor",
     requires2FA: true
-},
-
-{
-    username: "staff",
-    password: "staff123",
-    role: "staff",
-    requires2FA: false
 }
 
 ];
 
 /* =========================================================
-AUDIT LOGGING
+   UTILITIES
 ========================================================= */
 
-function auditLog(action) {
+function log(message)
+{
+    console.log(
+        `[AUTH ${new Date().toLocaleTimeString()}] ${message}`
+    );
+}
 
-const timestamp = new Date().toISOString();
+function generateToken()
+{
+    return crypto.randomUUID();
+}
 
-console.log(
-    `[AUDIT] ${timestamp} | ${action}`
-);
+function saveSession(session)
+{
+    sessionStorage.setItem(
+        CONFIG.SESSION_KEY,
+        JSON.stringify(session)
+    );
+}
 
-const auditContainer =
-    document.getElementById("auditLog");
+function loadSession()
+{
+    const raw =
+        sessionStorage.getItem(CONFIG.SESSION_KEY);
 
-if (!auditContainer) return;
+    if (!raw) return null;
 
-const entry =
-    document.createElement("div");
+    try
+    {
+        return JSON.parse(raw);
+    }
+    catch
+    {
+        return null;
+    }
+}
 
-entry.className = "audit-entry";
-
-entry.textContent =
-    `${timestamp} | ${action}`;
-
-auditContainer.prepend(entry);
-
+function destroySession()
+{
+    sessionStorage.removeItem(CONFIG.SESSION_KEY);
 }
 
 /* =========================================================
-ATTEMPT MANAGEMENT
+   LOGIN ATTEMPTS
 ========================================================= */
 
-function getAttemptData() {
-
-return JSON.parse(
-    localStorage.getItem(
-        AUTH.loginAttemptsKey
-    )
-) || {
-
-    count: 0,
-    lockedUntil: null
-};
-
+function getAttempts()
+{
+    return JSON.parse(
+        localStorage.getItem(CONFIG.ATTEMPT_KEY)
+    ) || {
+        count: 0,
+        lockUntil: null
+    };
 }
 
-function saveAttemptData(data) {
-
-localStorage.setItem(
-    AUTH.loginAttemptsKey,
-    JSON.stringify(data)
-);
-
+function saveAttempts(data)
+{
+    localStorage.setItem(
+        CONFIG.ATTEMPT_KEY,
+        JSON.stringify(data)
+    );
 }
 
-function clearAttempts() {
-
-localStorage.removeItem(
-    AUTH.loginAttemptsKey
-);
-
+function clearAttempts()
+{
+    localStorage.removeItem(CONFIG.ATTEMPT_KEY);
 }
 
-function isLocked() {
+function isLocked()
+{
+    const data = getAttempts();
 
-const data = getAttemptData();
+    if (!data.lockUntil)
+        return false;
 
-if (!data.lockedUntil)
-    return false;
+    if (Date.now() > data.lockUntil)
+    {
+        clearAttempts();
+        return false;
+    }
 
-if (Date.now() > data.lockedUntil) {
+    return true;
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function handleLogin(username,password)
+{
+    const msg =
+        document.getElementById("loginMessage");
+
+    msg.textContent = "";
+
+    if (!username || !password)
+    {
+        msg.textContent =
+            "Please enter username and password.";
+
+        return;
+    }
+
+    if (isLocked())
+    {
+        msg.textContent =
+            "Account temporarily locked.";
+
+        return;
+    }
+
+    const user =
+        USERS.find(
+            u =>
+            u.username === username &&
+            u.password === password
+        );
+
+    if (!user)
+    {
+        const data = getAttempts();
+
+        data.count++;
+
+        if (data.count >= CONFIG.MAX_ATTEMPTS)
+        {
+            data.lockUntil =
+                Date.now() +
+                CONFIG.LOCKOUT_MINUTES * 60000;
+
+            saveAttempts(data);
+
+            msg.textContent =
+                "Too many failed logins.";
+
+            return;
+        }
+
+        saveAttempts(data);
+
+        msg.textContent =
+            `Invalid credentials (${data.count}/${CONFIG.MAX_ATTEMPTS})`;
+
+        return;
+    }
 
     clearAttempts();
 
-    return false;
-}
-
-return true;
-
-}
-
-/* =========================================================
-TOKEN GENERATOR
-========================================================= */
-
-function generateToken() {
-
-return btoa(
-    crypto.randomUUID() +
-    Date.now()
-);
-
-}
-
-/* =========================================================
-LOGIN
-========================================================= */
-
-async function handleLogin(
-username,
-password
-) {
-
-const msg =
-    document.getElementById(
-        "loginMessage"
-    );
-
-msg.textContent = "";
-
-if (!username || !password) {
-
-    msg.textContent =
-        "Username and password required.";
-
-    return;
-}
-
-if (isLocked()) {
-
-    msg.textContent =
-        "Account temporarily locked.";
-
-    return;
-}
-
-const user = USERS.find(
-    u => u.username === username
-);
-
-if (
-    !user ||
-    user.password !== password
-) {
-
-    const data =
-        getAttemptData();
-
-    data.count++;
-
     if (
-        data.count >=
-        AUTH.maxAttempts
-    ) {
-
-        data.lockedUntil =
-            Date.now() +
-            AUTH.lockDuration;
-
-        saveAttemptData(data);
-
-        msg.textContent =
-            "Account locked.";
-
-        auditLog(
-            `LOCKOUT | ${username}`
+        user.requires2FA &&
+        typeof start2FA === "function"
+    )
+    {
+        start2FA(
+            () => finalizeLogin(user)
         );
 
         return;
     }
 
-    saveAttemptData(data);
-
-    msg.textContent =
-        `Invalid login (${data.count}/${AUTH.maxAttempts})`;
-
-    auditLog(
-        `FAILED LOGIN | ${username}`
-    );
-
-    return;
-}
-
-clearAttempts();
-
-auditLog(
-    `LOGIN SUCCESS | ${username}`
-);
-
-if (
-    user.requires2FA &&
-    typeof start2FA === "function"
-) {
-
-    start2FA(() => {
-
-        createSession(user);
-
-    });
-
-    return;
-}
-
-createSession(user);
-
+    finalizeLogin(user);
 }
 
 /* =========================================================
-SESSION
+   SUCCESS LOGIN
 ========================================================= */
 
-function createSession(user) {
+function finalizeLogin(user)
+{
+    const session = {
 
-const session = {
+        username: user.username,
 
-    username:
-        user.username,
+        role: user.role,
 
-    role:
-        user.role,
+        loginTime: Date.now(),
 
-    loginTime:
-        Date.now(),
+        token: generateToken()
+    };
 
-    token:
-        generateToken()
-};
+    saveSession(session);
 
-sessionStorage.setItem(
+    renderDashboard(session);
 
-    AUTH.sessionKey,
-
-    JSON.stringify(session)
-);
-
-showDashboard(session);
-
+    log(
+        `${user.username} authenticated`
+    );
 }
 
 /* =========================================================
-SESSION RESTORE
+   DASHBOARD
 ========================================================= */
 
-function getSession() {
+function renderDashboard(session)
+{
+    const login =
+        document.getElementById(
+            "loginContainer"
+        );
 
-const raw =
-    sessionStorage.getItem(
-        AUTH.sessionKey
-    );
+    const dashboard =
+        document.getElementById(
+            "summaryBox"
+        );
 
-if (!raw)
-    return null;
+    if (!login || !dashboard)
+        return;
 
-try {
+    login.style.display = "none";
 
-    return JSON.parse(raw);
+    dashboard.style.display = "block";
 
-} catch {
+    updateAIStatus(session);
 
-    return null;
+    renderDashboardCards();
+
+    renderPhaseList();
 }
 
-}
+function updateAIStatus(session)
+{
+    const bubble =
+        document.getElementById(
+            "aiStatusBubble"
+        );
 
-function restoreSession() {
+    if (!bubble)
+        return;
 
-const session =
-    getSession();
-
-if (!session)
-    return;
-
-const age =
-    Date.now() -
-    session.loginTime;
-
-if (
-    age >
-    AUTH.sessionTimeout
-) {
-
-    logout();
-
-    return;
-}
-
-showDashboard(session);
-
-auditLog(
-    `SESSION RESTORED | ${session.username}`
-);
-```
-
-}
-
-/* =========================================================
-DASHBOARD
-========================================================= */
-
-function showDashboard(session) {
-
-const loginContainer =
-    document.getElementById(
-        "loginContainer"
-    );
-
-const dashboard =
-    document.getElementById(
-        "summaryBox"
-    );
-
-loginContainer.hidden = true;
-
-dashboard.hidden = false;
-
-const aiBubble =
-    document.getElementById(
-        "aiStatusBubble"
-    );
-
-if (aiBubble) {
-
-    aiBubble.innerHTML = `
-        User: ${session.username}
-        |
-        Role: ${session.role}
-        |
-        AI Core Active
+    bubble.innerHTML =
+    `
+        AI CORE ONLINE •
+        USER: ${session.username}
+        • ROLE: ${session.role}
     `;
 }
 
-initializeDashboard(
-    session
-);
+function renderDashboardCards()
+{
+    const container =
+        document.getElementById(
+            "searchContainer"
+        );
 
-if (
-    typeof PhaseRegistry !==
-    "undefined"
-) {
+    if (!container)
+        return;
 
-    renderPhaseList(
-        session.role
-    );
-}
+    container.innerHTML =
+    `
+        <div class="dashboard-grid">
 
-}
+            <div class="dashboard-card">
+                <h3>18</h3>
+                <p>Total Phases</p>
+            </div>
 
-/* =========================================================
-DASHBOARD DATA
-========================================================= */
+            <div class="dashboard-card">
+                <h3>ISO 20022</h3>
+                <p>Compliance</p>
+            </div>
 
-function initializeDashboard(
-session
-) {
+            <div class="dashboard-card">
+                <h3>Bakong</h3>
+                <p>Connected</p>
+            </div>
 
-const assets =
-    document.getElementById(
-        "assetValue"
-    );
+            <div class="dashboard-card">
+                <h3>SOC</h3>
+                <p>Monitoring</p>
+            </div>
 
-const deposits =
-    document.getElementById(
-        "depositValue"
-    );
-
-const tx =
-    document.getElementById(
-        "transactionValue"
-    );
-
-const capital =
-    document.getElementById(
-        "capitalRatio"
-    );
-
-if (assets)
-    assets.textContent =
-    "$250,000,000";
-
-if (deposits)
-    deposits.textContent =
-    "$180,000,000";
-
-if (tx)
-    tx.textContent =
-    "12,458";
-
-if (capital)
-    capital.textContent =
-    "18.4%";
-
-auditLog(
-    `DASHBOARD LOADED | ${session.username}`
-);
-
+        </div>
+    `;
 }
 
 /* =========================================================
-PHASE RENDERING
+   PHASES
 ========================================================= */
 
-function renderPhaseList(role) {
+function renderPhaseList()
+{
+    const list =
+        document.getElementById(
+            "phasesList"
+        );
 
-const list =
-    document.getElementById(
-        "phasesList"
-    );
+    if (!list)
+        return;
 
-if (
-    !list ||
-    typeof PhaseRegistry ===
-    "undefined"
-)
-    return;
+    list.innerHTML = "";
 
-list.innerHTML = "";
+    if (
+        !window.PhaseRegistry ||
+        !PhaseRegistry.getAll
+    )
+    {
+        list.innerHTML =
+            "<li>No phases loaded.</li>";
 
-PhaseRegistry
-    .getAll()
+        return;
+    }
 
-    .forEach(phase => {
+    PhaseRegistry
+        .getAll()
+        .forEach(phase =>
+        {
+            const li =
+                document.createElement("li");
 
-        const li =
-            document.createElement(
-                "li"
+            li.className =
+                "phase-item";
+
+            li.innerHTML =
+            `
+            ${phase.name}
+            <span>
+            ${phase.status}
+            </span>
+            `;
+
+            li.onclick = () =>
+            {
+                if (
+                    typeof phase.render ===
+                    "function"
+                )
+                {
+                    phase.render();
+                }
+            };
+
+            list.appendChild(li);
+        });
+}
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout()
+{
+    destroySession();
+
+    location.reload();
+}
+
+/* =========================================================
+   SESSION RESTORE
+========================================================= */
+
+function restoreSession()
+{
+    const session =
+        loadSession();
+
+    if (!session)
+        return;
+
+    renderDashboard(session);
+}
+
+/* =========================================================
+   SESSION TIMEOUT
+========================================================= */
+
+function startSessionTimer()
+{
+    let timeout;
+
+    const reset = () =>
+    {
+        clearTimeout(timeout);
+
+        timeout =
+        setTimeout(() =>
+        {
+            alert(
+                "Session expired."
             );
 
-        li.textContent =
-            `${phase.id}. ${phase.name}`;
+            logout();
 
-        li.onclick = () => {
+        },
+        CONFIG.SESSION_TIMEOUT_MINUTES
+        * 60000);
+    };
 
-            if (
-                typeof showPhaseDetail ===
-                "function"
-            ) {
+    document.addEventListener(
+        "mousemove",
+        reset
+    );
 
-                showPhaseDetail(
-                    phase.id
-                );
-            }
-        };
+    document.addEventListener(
+        "keypress",
+        reset
+    );
 
-        list.appendChild(li);
-    });
-
+    reset();
 }
 
 /* =========================================================
-LOGOUT
-========================================================= */
-
-function logout() {
-
-sessionStorage.removeItem(
-    AUTH.sessionKey
-);
-
-auditLog("LOGOUT");
-
-location.reload();
-
-}
-
-/* =========================================================
-EVENT BINDING
+   INITIALIZE
 ========================================================= */
 
 document.addEventListener(
-"DOMContentLoaded",
-() => {
+    "DOMContentLoaded",
+    () =>
+    {
+        const form =
+            document.getElementById(
+                "loginForm"
+            );
 
-    const form =
-        document.getElementById(
-            "loginForm"
-        );
+        if (form)
+        {
+            form.addEventListener(
+                "submit",
+                e =>
+                {
+                    e.preventDefault();
 
-    if (form) {
+                    handleLogin(
+                        document
+                            .getElementById(
+                                "usernameInput"
+                            )
+                            .value
+                            .trim(),
 
-        form.addEventListener(
-            "submit",
-            e => {
+                        document
+                            .getElementById(
+                                "passwordInput"
+                            )
+                            .value
+                            .trim()
+                    );
+                }
+            );
+        }
 
-                e.preventDefault();
+        restoreSession();
 
-                const username =
-                    document
-                    .getElementById(
-                        "usernameInput"
-                    )
-                    .value.trim();
+        startSessionTimer();
 
-                const password =
-                    document
-                    .getElementById(
-                        "passwordInput"
-                    )
-                    .value.trim();
-
-                handleLogin(
-                    username,
-                    password
-                );
-            }
-        );
+        document
+            .getElementById("logoutBtn")
+            ?.addEventListener(
+                "click",
+                logout
+            );
     }
-
-    restoreSession();
-}
-
 );
 
 /* =========================================================
-GLOBAL EXPORTS
+   GLOBALS
 ========================================================= */
 
-window.handleLogin =
-handleLogin;
-
-window.logout =
-logout;
-
-window.getSession =
-getSession;
-
-window.showDashboard =
-showDashboard;
+window.logout = logout;
+window.handleLogin = handleLogin;
 
 })();
