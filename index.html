@@ -5,13 +5,13 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HUOKAING THARA BANK | Enterprise Platform v6</title>
+<title>HUOKAING THARA BANKING SYSTEM</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Referrer-Policy" content="no-referrer">
 
 <link rel="stylesheet" href="styles.css">
 
@@ -29,359 +29,147 @@
 
 <div id="bootScreen" class="boot-screen">
 
-```
 <h1>HUOKAING THARA BANK</h1>
 
 <p id="bootStatus">
-    Initializing Enterprise Banking Environment...
+Initializing Secure Banking Environment...
 </p>
-```
 
 </div>
 
 <!-- ===================================================== -->
 
-<!-- LOGIN SCREEN -->
+<!-- LOGIN CONTAINER -->
 
 <!-- ===================================================== -->
 
-<section id="loginContainer" class="hologram">
+<div id="loginContainer" class="hologram">
 
-```
 <div class="bank-logo-wrapper">
-    <img src="bank.jpg"
-         class="bank-logo-img"
-         alt="Bank Logo">
+
+<img
+src="bank.jpg"
+alt="Bank Logo"
+class="bank-logo-img">
+
 </div>
 
-<h1>Enterprise Banking Platform</h1>
+<h1>HUOKAING THARA BANKING SYSTEM</h1>
 
 <form id="loginForm" class="login-form">
 
-    <input
-        id="usernameInput"
-        type="text"
-        placeholder="Username"
-        required>
+<input
+id="usernameInput"
+type="text"
+placeholder="Username"
+required>
 
-    <input
-        id="passwordInput"
-        type="password"
-        placeholder="Password"
-        required>
+<input
+id="passwordInput"
+type="password"
+placeholder="Password"
+required>
 
-    <button type="submit">
-        Login
-    </button>
+<button type="submit">
+Login
+</button>
 
 </form>
 
-<p id="loginMessage"></p>
-```
+<p
+id="loginMessage"
+class="login-message">
+</p>
 
-</section>
+<div class="ai-recommend">
+
+<h3>System Status</h3>
+
+<p>🔐 MFA Enabled</p>
+<p>🛡 SOC Active</p>
+<p>📊 Liquidity Monitoring Online</p>
+<p>🌐 ISO 20022 Gateway Ready</p>
+
+</div>
+
+</div>
 
 <!-- ===================================================== -->
 
-<!-- MAIN DASHBOARD -->
+<!-- DASHBOARD -->
 
 <!-- ===================================================== -->
 
-<section id="summaryBox" hidden>
+<div
+id="summaryBox"
+class="hologram dashboard"
+style="display:none;">
 
-```
-<!-- ================================================= -->
-<!-- HEADER -->
-<!-- ================================================= -->
+<header class="dashboard-header">
 
-<header class="system-header">
+<h2>
+🏦 HUOKAING THARA BANK
+</h2>
 
-    <div>
-
-        <h2>
-            HUOKAING THARA BANK
-        </h2>
-
-        <p>
-            Enterprise Banking Control Center
-        </p>
-
-    </div>
-
-    <div id="aiStatusBubble">
-
-        AI Core Offline
-
-    </div>
+<div id="aiStatusBubble">
+AI CORE OFFLINE
+</div>
 
 </header>
 
-<!-- ================================================= -->
-<!-- EXECUTIVE KPI DASHBOARD -->
-<!-- ================================================= -->
+<!-- Dashboard Statistics -->
 
-<section class="dashboard-grid">
+<div
+id="searchContainer"
+class="dashboard-grid">
+</div>
 
-    <div class="metric-card">
+<!-- Phase Navigation -->
 
-        <h3>Total Assets</h3>
+<ol
+id="phasesList"
+class="phases-list">
+</ol>
 
-        <div id="assetValue"
-             class="metric-value">
+<!-- Phase Content -->
 
-            $0
-
-        </div>
-
-    </div>
-
-    <div class="metric-card">
-
-        <h3>Total Deposits</h3>
-
-        <div id="depositValue"
-             class="metric-value">
-
-            $0
-
-        </div>
-
-    </div>
-
-    <div class="metric-card">
-
-        <h3>Transactions Today</h3>
-
-        <div id="transactionValue"
-             class="metric-value">
-
-            0
-
-        </div>
-
-    </div>
-
-    <div class="metric-card">
-
-        <h3>Capital Adequacy</h3>
-
-        <div id="capitalRatio"
-             class="metric-value">
-
-            0%
-
-        </div>
-
-    </div>
-
+<section
+id="phaseChecklistContainer"
+class="phase-checklist">
 </section>
-
-<!-- ================================================= -->
-<!-- MAIN NAVIGATION -->
-<!-- ================================================= -->
-
-<nav class="dashboard-menu">
-
-    <button data-module="dashboard">
-        Dashboard
-    </button>
-
-    <button data-module="accounts">
-        Accounts
-    </button>
-
-    <button data-module="customers">
-        Customers
-    </button>
-
-    <button data-module="transfers">
-        Transfers
-    </button>
-
-    <button data-module="risk">
-        Risk
-    </button>
-
-    <button data-module="soc">
-        SOC
-    </button>
-
-    <button data-module="bakong">
-        Bakong
-    </button>
-
-    <button data-module="swift">
-        ISO 20022
-    </button>
-
-    <button data-module="phases">
-        Phases
-    </button>
-
-</nav>
-
-<!-- ================================================= -->
-<!-- DYNAMIC MODULE AREA -->
-<!-- ================================================= -->
-
-<section id="moduleContent">
-
-</section>
-
-<!-- ================================================= -->
-<!-- PROJECT PHASES -->
-<!-- ================================================= -->
-
-<section>
-
-    <h2>
-        Strategic Banking Roadmap
-    </h2>
-
-    <ol id="phasesList"
-        class="phases-list">
-    </ol>
-
-</section>
-
-<!-- ================================================= -->
-<!-- PHASE DETAILS -->
-<!-- ================================================= -->
-
-<section id="phaseChecklistContainer">
-
-</section>
-
-<!-- ================================================= -->
-<!-- AI GUARDIAN -->
-<!-- ================================================= -->
-
-<section class="ai-core-panel">
-
-    <h2>
-        AI Guardian
-    </h2>
-
-    <div id="aiConsole">
-
-        Waiting for AI Core...
-
-    </div>
-
-</section>
-
-<!-- ================================================= -->
-<!-- SOC DEFENSE CENTER -->
-<!-- ================================================= -->
-
-<section class="soc-panel">
-
-    <h2>
-        Security Operations Center
-    </h2>
-
-    <div id="socContainer">
-
-    </div>
-
-</section>
-
-<!-- ================================================= -->
-<!-- BAKONG INTEGRATION -->
-<!-- ================================================= -->
-
-<section class="bakong-panel">
-
-    <h2>
-        Bakong Integration
-    </h2>
-
-    <div id="bakongContainer">
-
-    </div>
-
-</section>
-
-<!-- ================================================= -->
-<!-- SWIFT / ISO 20022 -->
-<!-- ================================================= -->
-
-<section class="swift-panel">
-
-    <h2>
-        SWIFT & ISO 20022
-    </h2>
-
-    <div id="swiftContainer">
-
-    </div>
-
-</section>
-
-<!-- ================================================= -->
-<!-- AUDIT CENTER -->
-<!-- ================================================= -->
-
-<section>
-
-    <h2>
-        Audit Log
-    </h2>
-
-    <div id="auditLog"
-         class="audit-log">
-
-    </div>
-
-</section>
-
-<!-- ================================================= -->
-<!-- SEARCH ENGINE -->
-<!-- ================================================= -->
-
-<section id="searchContainer">
-
-</section>
-
-<!-- ================================================= -->
-<!-- FOOTER CONTROLS -->
-<!-- ================================================= -->
 
 <div class="dashboard-controls">
 
-    <button id="logoutBtn"
-            class="btn-danger">
-
-        Logout
-
-    </button>
+<button id="logoutBtn">
+Logout
+</button>
 
 </div>
-```
 
-</section>
-
-<!-- ===================================================== -->
-
-<!-- SYSTEM HEARTBEAT -->
-
-<!-- ===================================================== -->
-
-<div id="systemHeartbeat"
-     class="heartbeat">
 </div>
 
 <!-- ===================================================== -->
 
-<!-- CORE SCRIPTS -->
+<!-- HEARTBEAT -->
 
 <!-- ===================================================== -->
 
-<script src="js/master_loader.js"></script>
+<div
+id="systemHeartbeat"
+class="heartbeat-indicator">
+</div>
+
+<!-- ===================================================== -->
+
+<!-- SCRIPTS -->
+
+<!-- ===================================================== -->
+
+<script src="js/phase_core.js"></script>
 
 <script src="js/login.js"></script>
 
-<script src="js/phase_core.js"></script>
+<script src="js/master_loader.js"></script>
 
 <script src="js/ai_core.js"></script>
 
@@ -391,11 +179,37 @@
 
 <script src="js/soc_defense.js"></script>
 
-<script src="js/stress_test.js"></script>
-
 <script src="js/bakong_integration.js"></script>
 
 <script src="js/charter_logic.js"></script>
 
+<script src="js/stress_test.js"></script>
+
+<script>
+
+document.addEventListener(
+"bankSystemReady",
+() =>
+{
+const boot =
+document.getElementById("bootScreen");
+
+const status =
+document.getElementById("bootStatus");
+
+status.textContent =
+"All banking modules loaded.";
+
+setTimeout(() =>
+{
+boot.style.display = "none";
+},
+1500);
+}
+);
+
+</script>
+
 </body>
+
 </html>
