@@ -1,42 +1,39 @@
 /* =========================================================
    HUOKAING THARA BANK
-   Enterprise Banking Platform v6
+   Enterprise Banking Operating Platform
+   Version 5.0
 ========================================================= */
-
-/* ---------------------------
-   ROOT DESIGN SYSTEM
----------------------------- */
 
 :root {
 
-    /* Core */
-    --bg-main: #030712;
-    --bg-panel: #111827;
-    --bg-card: #1f2937;
+    /* Core Colors */
+    --bg-primary: #050816;
+    --bg-secondary: #0f172a;
+    --bg-panel: rgba(15,23,42,.75);
 
-    /* Banking Status */
-    --success: #00ff88;
-    --warning: #ffd700;
-    --danger: #ff4d4d;
-    --info: #00e5ff;
+    --accent: #00e5ff;
+    --accent-green: #00ff88;
+    --accent-yellow: #ffd700;
+    --accent-red: #ff4d4d;
+    --accent-purple: #8b5cf6;
 
-    /* Text */
-    --text-main: #ffffff;
-    --text-muted: #94a3b8;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
 
-    /* Effects */
-    --border: rgba(255,255,255,.08);
-    --glass: rgba(255,255,255,.04);
+    --glass: rgba(255,255,255,.05);
+    --glass-border: rgba(255,255,255,.10);
 
-    --radius: 16px;
+    --radius: 18px;
 
     --shadow:
         0 10px 30px rgba(0,0,0,.35);
+
+    --transition: all .3s ease;
 }
 
-/* ---------------------------
-   GLOBAL
----------------------------- */
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
     margin:0;
@@ -44,351 +41,409 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        radial-gradient(circle at top left,
+        rgba(0,229,255,.15),
+        transparent 40%),
+
+        radial-gradient(circle at bottom right,
+        rgba(0,255,136,.12),
+        transparent 40%),
+
+        linear-gradient(
+            135deg,
+            #010409,
+            #07111f,
+            #0f172a
+        );
+
+    color:var(--text-primary);
+
+    min-height:100vh;
+    padding:20px;
+}
+
+/* =========================================================
+   BOOT SCREEN
+========================================================= */
+
+.boot-screen{
+
+    position:fixed;
+    inset:0;
+
+    background:#000;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:99999;
+}
+
+.boot-screen h1{
+
+    color:var(--accent);
+
+    margin-bottom:20px;
+}
+
+#bootStatus{
+    color:#00ff88;
+    font-family:monospace;
+}
+
+/* =========================================================
+   LOGIN CONTAINER
+========================================================= */
+
+.hologram{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    background:var(--bg-panel);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid var(--glass-border);
+
+    border-radius:var(--radius);
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+}
+
+#loginContainer{
+
+    max-width:520px;
+    margin:auto;
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.bank-logo-wrapper{
+
+    display:flex;
+    justify-content:center;
+
+    margin-bottom:25px;
+}
+
+.bank-logo-img{
+
+    width:140px;
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 0 25px rgba(0,229,255,.25);
+}
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+h1,h2,h3{
+
+    font-weight:700;
+}
+
+h1{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    color:var(--accent);
+}
+
+h2{
+    color:var(--accent);
+}
+
+p{
+    line-height:1.6;
+}
+
+/* =========================================================
+   LOGIN FORM
+========================================================= */
+
+.login-form{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+.login-form input{
+
+    background:#111827;
+
+    border:1px solid #334155;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:12px;
+}
+
+.login-form input:focus{
+
+    outline:none;
+
+    border-color:var(--accent);
+
+    box-shadow:
+        0 0 10px rgba(0,229,255,.25);
+}
+
+.login-form button{
 
     background:
         linear-gradient(
             135deg,
-            #020617,
-            #0f172a,
-            #111827
+            #00e5ff,
+            #00bfff
         );
 
-    color:var(--text-main);
+    border:none;
 
-    font-family:
-        Inter,
-        Segoe UI,
-        sans-serif;
+    color:black;
 
-    min-height:100vh;
-}
-
-/* ---------------------------
-   ENTERPRISE HEADER
----------------------------- */
-
-.system-header{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:20px;
-
-    background:var(--bg-panel);
-
-    border-bottom:
-        1px solid var(--border);
-}
-
-.system-title{
-
-    color:var(--info);
-
-    font-size:1.5rem;
     font-weight:700;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    cursor:pointer;
 }
 
-.system-status{
+.login-form button:hover{
 
-    color:var(--success);
-    font-weight:bold;
+    transform:translateY(-2px);
 }
 
-/* ---------------------------
-   EXECUTIVE DASHBOARD
----------------------------- */
+.login-message{
+
+    margin-top:15px;
+
+    color:var(--accent-red);
+}
+
+/* =========================================================
+   AI PANELS
+========================================================= */
+
+.ai-recommend{
+
+    margin-top:20px;
+
+    padding:15px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:12px;
+}
+
+.ai-recommend h3{
+
+    color:var(--accent-green);
+
+    margin-bottom:10px;
+}
+
+.ai-recommend p{
+
+    font-size:.9rem;
+    margin-bottom:5px;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard{
+
+    width:100%;
+}
 
 .dashboard-grid{
 
     display:grid;
 
     grid-template-columns:
-        repeat(auto-fit,minmax(250px,1fr));
+        repeat(auto-fit,minmax(220px,1fr));
 
     gap:20px;
 
-    padding:20px;
+    margin-top:20px;
 }
 
-.metric-card{
+.card{
 
-    background:var(--bg-card);
+    background:rgba(255,255,255,.03);
 
-    border:
-        1px solid var(--border);
+    border:1px solid rgba(255,255,255,.08);
 
-    border-radius:var(--radius);
-
-    padding:20px;
-
-    box-shadow:var(--shadow);
-}
-
-.metric-value{
-
-    font-size:2rem;
-
-    font-weight:700;
-
-    margin-top:10px;
-}
-
-/* ---------------------------
-   AI GUARDIAN
----------------------------- */
-
-.ai-core-panel{
-
-    background:
-        rgba(0,229,255,.05);
-
-    border-left:
-        4px solid var(--info);
+    border-radius:16px;
 
     padding:20px;
 
-    border-radius:12px;
+    text-align:center;
 }
 
-.ai-status-online{
-    color:var(--success);
-}
+.card h3{
 
-.ai-status-warning{
-    color:var(--warning);
-}
-
-.ai-status-critical{
-    color:var(--danger);
-}
-
-/* ---------------------------
-   SOC CENTER
----------------------------- */
-
-.soc-panel{
-
-    background:
-        rgba(255,77,77,.06);
-
-    border-left:
-        4px solid var(--danger);
-
-    padding:20px;
-}
-
-.security-event{
-
-    display:flex;
-
-    justify-content:space-between;
-
+    color:var(--accent);
     margin-bottom:10px;
 }
 
-.event-high{
-    color:var(--danger);
-}
+.card p{
 
-.event-medium{
-    color:var(--warning);
-}
-
-.event-low{
-    color:var(--success);
-}
-
-/* ---------------------------
-   PHASE MANAGEMENT
----------------------------- */
-
-.phase-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(350px,1fr));
-
-    gap:20px;
-}
-
-.phase-card{
-
-    background:var(--bg-card);
-
-    border-radius:12px;
-
-    padding:20px;
-
-    border-left:
-        4px solid var(--info);
-}
-
-.phase-complete{
-    border-left-color:var(--success);
-}
-
-.phase-progress{
-    border-left-color:var(--warning);
-}
-
-.phase-risk{
-    border-left-color:var(--danger);
-}
-
-/* ---------------------------
-   BASEL CAPITAL MONITOR
----------------------------- */
-
-.capital-widget{
-
-    background:
-        rgba(0,255,136,.05);
-
-    border:
-        1px solid rgba(0,255,136,.15);
-
-    padding:20px;
-
-    border-radius:12px;
-}
-
-.capital-ratio{
-
-    font-size:2rem;
+    font-size:1.6rem;
     font-weight:bold;
 }
 
-.capital-safe{
-    color:var(--success);
+/* =========================================================
+   MENU
+========================================================= */
+
+.dashboard-menu{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:25px;
 }
 
-.capital-watch{
-    color:var(--warning);
+.dashboard-menu button{
+
+    width:auto;
+
+    background:#111827;
+
+    color:white;
+
+    border:1px solid #334155;
+
+    padding:12px 18px;
 }
 
-.capital-danger{
-    color:var(--danger);
+.dashboard-menu button:hover{
+
+    background:var(--accent);
+
+    color:black;
 }
 
-/* ---------------------------
-   RISK HEATMAP
----------------------------- */
+/* =========================================================
+   PHASES
+========================================================= */
 
-.risk-grid{
+.phases-list{
+
+    margin-top:30px;
 
     display:grid;
 
     grid-template-columns:
-        repeat(5,1fr);
+        repeat(auto-fit,minmax(300px,1fr));
 
-    gap:5px;
+    gap:12px;
+
+    list-style:none;
 }
 
-.risk-cell{
+.phases-list li{
 
-    height:60px;
+    background:#111827;
 
-    border-radius:6px;
-}
-
-.risk-low{
-    background:#166534;
-}
-
-.risk-medium{
-    background:#ca8a04;
-}
-
-.risk-high{
-    background:#dc2626;
-}
-
-/* ---------------------------
-   BAKONG DASHBOARD
----------------------------- */
-
-.bakong-panel{
-
-    border-left:
-        4px solid #00d084;
-
-    padding:20px;
-
-    background:
-        rgba(0,208,132,.06);
-}
-
-.bakong-status{
-    color:#00ff88;
-}
-
-/* ---------------------------
-   SWIFT / ISO20022
----------------------------- */
-
-.swift-panel{
-
-    border-left:
-        4px solid #3b82f6;
-
-    padding:20px;
-}
-
-.message-card{
-
-    background:#0f172a;
+    border-left:4px solid var(--accent);
 
     padding:15px;
 
     border-radius:10px;
 
-    margin-top:10px;
+    cursor:pointer;
+
+    transition:var(--transition);
 }
 
-/* ---------------------------
-   AUDIT PANEL
----------------------------- */
+.phases-list li:hover{
 
-.audit-log{
+    transform:translateX(5px);
 
-    max-height:400px;
-
-    overflow-y:auto;
-
-    background:#020617;
-
-    padding:15px;
-
-    border-radius:10px;
+    background:#1e293b;
 }
 
-.audit-entry{
+/* =========================================================
+   PHASE DETAILS
+========================================================= */
 
-    padding:10px;
+.phase-detail-box{
 
-    border-bottom:
-        1px solid rgba(255,255,255,.05);
+    margin-top:25px;
+
+    padding:25px;
+
+    background:rgba(255,255,255,.03);
+
+    border-radius:14px;
+
+    border:1px solid rgba(255,255,255,.08);
 }
 
-/* ---------------------------
+/* =========================================================
    TABLES
----------------------------- */
+========================================================= */
 
 table{
 
     width:100%;
 
     border-collapse:collapse;
+
+    margin-top:15px;
 }
 
 th{
 
-    background:#1e293b;
+    background:#111827;
 
-    color:var(--info);
+    color:var(--accent);
+
+    text-align:left;
 
     padding:12px;
 }
@@ -401,50 +456,57 @@ td{
         1px solid rgba(255,255,255,.05);
 }
 
-/* ---------------------------
+/* =========================================================
    BUTTONS
----------------------------- */
+========================================================= */
 
-.btn-primary{
+button{
 
-    background:var(--info);
-
-    color:black;
+    transition:var(--transition);
 }
 
-.btn-success{
+#logoutBtn{
 
-    background:var(--success);
-
-    color:black;
-}
-
-.btn-danger{
-
-    background:var(--danger);
+    background:#ff4444;
 
     color:white;
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:10px;
 }
 
-.btn-warning{
+/* =========================================================
+   SEARCH
+========================================================= */
 
-    background:var(--warning);
+#searchContainer{
 
-    color:black;
+    margin-top:25px;
 }
 
-/* ---------------------------
-   SYSTEM HEARTBEAT
----------------------------- */
+/* =========================================================
+   HEARTBEAT
+========================================================= */
 
-.heartbeat{
+.heartbeat-indicator{
+
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
 
     width:15px;
     height:15px;
 
-    background:var(--success);
+    background:#00ff88;
 
     border-radius:50%;
+
+    box-shadow:
+        0 0 15px #00ff88;
 
     animation:pulse 1.5s infinite;
 }
@@ -456,7 +518,7 @@ td{
     }
 
     50%{
-        transform:scale(1.4);
+        transform:scale(1.5);
     }
 
     100%{
@@ -464,22 +526,44 @@ td{
     }
 }
 
-/* ---------------------------
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--accent);
+
+    border-radius:8px;
+}
+
+/* =========================================================
    MOBILE
----------------------------- */
+========================================================= */
 
 @media(max-width:768px){
 
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
+    .dashboard-menu{
 
-    .phase-grid{
-        grid-template-columns:1fr;
-    }
-
-    .system-header{
         flex-direction:column;
-        gap:10px;
+    }
+
+    .dashboard-menu button{
+
+        width:100%;
+    }
+
+    .phases-list{
+
+        grid-template-columns:1fr;
+    }
+
+    .hologram{
+
+        padding:20px;
     }
 }
