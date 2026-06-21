@@ -1,238 +1,401 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>HUOKAING THARA Banking System</title>
 
-  <!-- Security -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <meta http-equiv="Referrer-Policy" content="no-referrer">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="styles.css" />
-  
-  <link rel="shortcut icon" href="bank.jpg" type="image/jpeg" />
+<title>HUOKAING THARA BANK | Enterprise Platform v6</title>
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+
+<link rel="stylesheet" href="styles.css">
+
+<link rel="icon" href="bank.jpg">
+
 </head>
 
 <body>
 
-  <!-- ===================================== -->
-  <!-- SYSTEM BOOT SCREEN -->
-  <!-- ===================================== -->
+<!-- ===================================================== -->
 
-  <div id="bootScreen" class="boot-screen">
-    <h1>Huokaing Thara Bank Secure Environment</h1>
-    <p id="bootStatus">Initializing system modules...</p>
-  </div>
+<!-- BOOT SCREEN -->
 
-  <!-- ===================================== -->
-  <!-- LOGIN SCREEN -->
-  <!-- ===================================== -->
+<!-- ===================================================== -->
 
-  <div class="hologram" id="loginContainer">
+<div id="bootScreen" class="boot-screen">
 
-    <!-- Institutional Brand Logo Layer -->
-    <div class="bank-logo-wrapper">
-      <img src="bank.jpg" alt="HUOKAING THARA Bank Official Logo" class="bank-logo-img" />
+```
+<h1>HUOKAING THARA BANK</h1>
+
+<p id="bootStatus">
+    Initializing Enterprise Banking Environment...
+</p>
+```
+
+</div>
+
+<!-- ===================================================== -->
+
+<!-- LOGIN SCREEN -->
+
+<!-- ===================================================== -->
+
+<section id="loginContainer" class="hologram">
+
+```
+<div class="bank-logo-wrapper">
+    <img src="bank.jpg"
+         class="bank-logo-img"
+         alt="Bank Logo">
+</div>
+
+<h1>Enterprise Banking Platform</h1>
+
+<form id="loginForm" class="login-form">
+
+    <input
+        id="usernameInput"
+        type="text"
+        placeholder="Username"
+        required>
+
+    <input
+        id="passwordInput"
+        type="password"
+        placeholder="Password"
+        required>
+
+    <button type="submit">
+        Login
+    </button>
+
+</form>
+
+<p id="loginMessage"></p>
+```
+
+</section>
+
+<!-- ===================================================== -->
+
+<!-- MAIN DASHBOARD -->
+
+<!-- ===================================================== -->
+
+<section id="summaryBox" hidden>
+
+```
+<!-- ================================================= -->
+<!-- HEADER -->
+<!-- ================================================= -->
+
+<header class="system-header">
+
+    <div>
+
+        <h2>
+            HUOKAING THARA BANK
+        </h2>
+
+        <p>
+            Enterprise Banking Control Center
+        </p>
+
     </div>
 
-    <h1>Huokaing Thara Banking System</h1>
+    <div id="aiStatusBubble">
 
-    <form id="loginForm" class="login-form" autocomplete="off">
-      <input id="usernameInput" type="text" placeholder="Username" required />
-      <input id="passwordInput" type="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-    </form>
+        AI Core Offline
 
-    <p id="loginMessage"
-       class="login-message"
-       role="alert"
-       aria-live="assertive"></p>
-
-    <div class="ai-recommend">
-      <h3>AI Recommendations</h3>
-      <p>🔐 Multi-Factor Authentication Enabled</p>
-      <p>📊 Liquidity Monitoring Active</p>
-      <p>🛡 SOC Defensive Layer Online</p>
-    </div>
-    <div class="ai-recommend">
-      <h3>AI Recommendations & System Health</h3>
-    
-      <!-- Security Layer -->
-      <p>🔐 Multi-Factor Authentication Enabled</p>
-      <p>🛡 SOC Defensive Layer Online</p>
-      <p>🕵️ IDS/IPS Pattern Recognition: ACTIVE</p>
-    
-      <!-- Financial & Ledger Layer -->
-      <p>📊 Liquidity Monitoring: STABLE</p>
-      <p>💎 Bakong Ledger: SYNCHRONIZED</p>
-      <p>💸 RTGS Transaction Buffer: 0.04ms</p>
-      <p>📈 Cross-Border Settlement: ENABLED</p>
-    
-      <!-- Network & Infrastructure -->
-      <p>🌐 Global Node Connectivity: 99.98%</p>
-      <p>📡 Satellite Uplink (Backup): STANDBY</p>
-      <p>🖧 DPLC Circuit Latency: 12ms</p>
-      <p>🔒 SSL/TLS Certificate: VALID (Exp: 2027)</p>
-    
-      <!-- SOC Alerts & Logs -->
-      <p>⚠️ Unauthorized IP Attempt Blocked: 192.168.1.1</p>
-      <p>✅ System Integrity Check: PASSED</p>
-      <p>🚀 6G Network Protocol: OPTIMIZED</p>
-      <p>🤖 AI Core Load: 14.2%</p>
-    
-      <div style="margin-top: 20px; font-size: 0.7rem; color: #888; border-top: 1px solid #333; pt-10px;">
-          CORE_LOAD_STAMP: <span id="currentTimestamp"></span><br>
-          KERNEL_VER: 3.0.0-ENT<br>
-          ENCRYPTION: AES-256-GCM
-      </div>
     </div>
 
-  <!-- ===================================== -->
-  <!-- DASHBOARD -->
-  <!-- ===================================== -->
+</header>
 
-  <div class="hologram dashboard" id="summaryBox" hidden>
+<!-- ================================================= -->
+<!-- EXECUTIVE KPI DASHBOARD -->
+<!-- ================================================= -->
 
-    <header class="dashboard-header">
-      <h1>Enterprise Banking Control Panel</h1>
-      <div id="aiStatusBubble" class="ai-bubble"></div>
-    </header>
+<section class="dashboard-grid">
 
-    <!-- Command Console injected here -->
-    <div id="searchContainer"></div>
+    <div class="metric-card">
+
+        <h3>Total Assets</h3>
+
+        <div id="assetValue"
+             class="metric-value">
+
+            $0
+
+        </div>
+
+    </div>
+
+    <div class="metric-card">
+
+        <h3>Total Deposits</h3>
+
+        <div id="depositValue"
+             class="metric-value">
+
+            $0
+
+        </div>
+
+    </div>
+
+    <div class="metric-card">
+
+        <h3>Transactions Today</h3>
+
+        <div id="transactionValue"
+             class="metric-value">
+
+            0
+
+        </div>
+
+    </div>
+
+    <div class="metric-card">
+
+        <h3>Capital Adequacy</h3>
+
+        <div id="capitalRatio"
+             class="metric-value">
+
+            0%
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- MAIN NAVIGATION -->
+<!-- ================================================= -->
+
+<nav class="dashboard-menu">
+
+    <button data-module="dashboard">
+        Dashboard
+    </button>
+
+    <button data-module="accounts">
+        Accounts
+    </button>
+
+    <button data-module="customers">
+        Customers
+    </button>
+
+    <button data-module="transfers">
+        Transfers
+    </button>
+
+    <button data-module="risk">
+        Risk
+    </button>
+
+    <button data-module="soc">
+        SOC
+    </button>
+
+    <button data-module="bakong">
+        Bakong
+    </button>
+
+    <button data-module="swift">
+        ISO 20022
+    </button>
+
+    <button data-module="phases">
+        Phases
+    </button>
+
+</nav>
+
+<!-- ================================================= -->
+<!-- DYNAMIC MODULE AREA -->
+<!-- ================================================= -->
+
+<section id="moduleContent">
+
+</section>
+
+<!-- ================================================= -->
+<!-- PROJECT PHASES -->
+<!-- ================================================= -->
+
+<section>
+
+    <h2>
+        Strategic Banking Roadmap
+    </h2>
 
     <ol id="phasesList"
-        aria-label="Project Phases"
-        class="phases-list"></ol>
+        class="phases-list">
+    </ol>
 
-    <section id="phaseChecklistContainer"
-             class="phase-checklist"></section>
+</section>
 
-    <div class="dashboard-controls">
-      <button id="logoutBtn">Logout</button>
+<!-- ================================================= -->
+<!-- PHASE DETAILS -->
+<!-- ================================================= -->
+
+<section id="phaseChecklistContainer">
+
+</section>
+
+<!-- ================================================= -->
+<!-- AI GUARDIAN -->
+<!-- ================================================= -->
+
+<section class="ai-core-panel">
+
+    <h2>
+        AI Guardian
+    </h2>
+
+    <div id="aiConsole">
+
+        Waiting for AI Core...
+
     </div>
 
-  </div>
+</section>
 
-  <!-- ===================================== -->
-  <!-- SYSTEM HEARTBEAT -->
-  <!-- ===================================== -->
+<!-- ================================================= -->
+<!-- SOC DEFENSE CENTER -->
+<!-- ================================================= -->
 
-  <div id="systemHeartbeat" class="heartbeat-indicator"></div>
+<section class="soc-panel">
 
-  <!-- ===================================== -->
-  <!-- MASTER BOOTLOADER (ONLY SCRIPT LOADED) -->
-  <!-- ===================================== -->
+    <h2>
+        Security Operations Center
+    </h2>
 
-  <script src="js/master_loader.js"></script>
-  <script src="js/login.js"></script>
-  <script src="js/ai_core.js"></script>
-  <script src="js/search.js.js"></script>
-  <script src="js/soc_defense.js"></script>
-  <script src="js/phase_core.js"></script>
+    <div id="socContainer">
 
-  <!-- ===================================== -->
-  <!-- INITIALIZATION -->
-  <!-- ===================================== -->
+    </div>
 
-  <script>
-    /* ------------------------------
-       Boot Status Listener
-    ------------------------------ */
+</section>
 
-    document.addEventListener("bankSystemReady", () => {
-      document.getElementById("bootStatus").textContent =
-        "All modules initialized successfully.";
-      setTimeout(() => {
-        document.getElementById("bootScreen").style.display = "none";
-      }, 1000);
-    });
+<!-- ================================================= -->
+<!-- BAKONG INTEGRATION -->
+<!-- ================================================= -->
 
-    /* ------------------------------
-       Login Binding
-    ------------------------------ */
+<section class="bakong-panel">
 
-    document.getElementById("loginForm")
-      .addEventListener("submit", async (e) => {
+    <h2>
+        Bakong Integration
+    </h2>
 
-        e.preventDefault();
+    <div id="bakongContainer">
 
-        const username =
-          document.getElementById("usernameInput").value.trim();
-        const password =
-          document.getElementById("passwordInput").value.trim();
+    </div>
 
-        if (typeof handleLogin === "function") {
-          await handleLogin(username, password);
-        }
-      });
+</section>
 
-    /* ------------------------------
-       Session Restore
-    ------------------------------ */
+<!-- ================================================= -->
+<!-- SWIFT / ISO 20022 -->
+<!-- ================================================= -->
 
-    window.addEventListener("load", () => {
+<section class="swift-panel">
 
-      if (typeof getSession === "function") {
-        const session = getSession();
-        if (session) {
-          showDashboard(session.username);
-        }
-      }
+    <h2>
+        SWIFT & ISO 20022
+    </h2>
 
-      if (typeof startAiMonitoring === "function") {
-        startAiMonitoring();
-      }
-    });
+    <div id="swiftContainer">
 
-    /* ------------------------------
-       Logout Binding
-    ------------------------------ */
+    </div>
 
-    document.addEventListener("click", (e) => {
-      if (e.target.id === "logoutBtn") {
-        if (typeof logout === "function") logout();
-      }
-    });
+</section>
 
-    // 🛡️ ULTRA SECURE MODE - BLOCK ALL DEV TOOLS
-    (function() {
-      // Block right-click
-      document.addEventListener('contextmenu', e => {
-        e.preventDefault(); e.stopImmediatePropagation();
-        document.body.innerHTML = '<div style="background:black;color:#f00;font-family:monospace;text-align:center;padding-top:30vh;font-size:2em;">🚫 BANK CLASSIFIED - ACCESS DENIED</div>';
-        return false;
-      });
+<!-- ================================================= -->
+<!-- AUDIT CENTER -->
+<!-- ================================================= -->
 
-      // Block ALL dev shortcuts
-      document.addEventListener('keydown', e => {
-        const blocked = ['F12', 'F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11',
-                        'KeyI', 'KeyU', 'KeyS', 'KeyC'].includes(e.code) ||
-                       (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i')) ||
-                       (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J'));
-        if (blocked) {
-          e.preventDefault(); e.stopImmediatePropagation();
-          document.title = '🚫 SECURE MODE ACTIVE';
-          return false;
-        }
-      }, true);
+<section>
 
-      // DevTools detection loop
-      setInterval(() => {
-        if (window.outerHeight - window.innerHeight > 200 || 
-            window.outerWidth - window.innerWidth > 200 ||
-            (window.console && window.console.profiles)) {
-          document.body.innerHTML = '<div style="background:#000;color:#f00;font-family:monospace;text-align:center;padding-top:30vh;font-size:3em;">🕵️ DEVELOPER TOOLS DETECTED<br>BANK DATA TERMINATED</div>';
-        }
-      }, 500);
+    <h2>
+        Audit Log
+    </h2>
 
-      // Disable text selection
-      document.addEventListener('selectstart', e => e.preventDefault());
-      document.addEventListener('dragstart', e => e.preventDefault());
-    })();  
-</script>
+    <div id="auditLog"
+         class="audit-log">
+
+    </div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- SEARCH ENGINE -->
+<!-- ================================================= -->
+
+<section id="searchContainer">
+
+</section>
+
+<!-- ================================================= -->
+<!-- FOOTER CONTROLS -->
+<!-- ================================================= -->
+
+<div class="dashboard-controls">
+
+    <button id="logoutBtn"
+            class="btn-danger">
+
+        Logout
+
+    </button>
+
+</div>
+```
+
+</section>
+
+<!-- ===================================================== -->
+
+<!-- SYSTEM HEARTBEAT -->
+
+<!-- ===================================================== -->
+
+<div id="systemHeartbeat"
+     class="heartbeat">
+</div>
+
+<!-- ===================================================== -->
+
+<!-- CORE SCRIPTS -->
+
+<!-- ===================================================== -->
+
+<script src="js/master_loader.js"></script>
+
+<script src="js/login.js"></script>
+
+<script src="js/phase_core.js"></script>
+
+<script src="js/ai_core.js"></script>
+
+<script src="js/search.js"></script>
+
+<script src="js/security_2fa.js"></script>
+
+<script src="js/soc_defense.js"></script>
+
+<script src="js/stress_test.js"></script>
+
+<script src="js/bakong_integration.js"></script>
+
+<script src="js/charter_logic.js"></script>
 
 </body>
 </html>
