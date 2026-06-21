@@ -1,215 +1,569 @@
-<!DOCTYPE html>
+/* =========================================================
+   HUOKAING THARA BANK
+   Enterprise Banking Operating Platform
+   Version 5.0
+========================================================= */
 
-<html lang="en">
+:root {
 
-<head>
+    /* Core Colors */
+    --bg-primary: #050816;
+    --bg-secondary: #0f172a;
+    --bg-panel: rgba(15,23,42,.75);
 
-<meta charset="UTF-8">
+    --accent: #00e5ff;
+    --accent-green: #00ff88;
+    --accent-yellow: #ffd700;
+    --accent-red: #ff4d4d;
+    --accent-purple: #8b5cf6;
 
-<title>HUOKAING THARA BANKING SYSTEM</title>
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    --glass: rgba(255,255,255,.05);
+    --glass-border: rgba(255,255,255,.10);
 
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
+    --radius: 18px;
 
-<link rel="stylesheet" href="styles.css">
+    --shadow:
+        0 10px 30px rgba(0,0,0,.35);
 
-<link rel="icon" href="bank.jpg">
-
-</head>
-
-<body>
-
-<!-- ===================================================== -->
-
-<!-- BOOT SCREEN -->
-
-<!-- ===================================================== -->
-
-<div id="bootScreen" class="boot-screen">
-
-<h1>HUOKAING THARA BANK</h1>
-
-<p id="bootStatus">
-Initializing Secure Banking Environment...
-</p>
-
-</div>
-
-<!-- ===================================================== -->
-
-<!-- LOGIN CONTAINER -->
-
-<!-- ===================================================== -->
-
-<div id="loginContainer" class="hologram">
-
-<div class="bank-logo-wrapper">
-
-<img
-src="bank.jpg"
-alt="Bank Logo"
-class="bank-logo-img">
-
-</div>
-
-<h1>HUOKAING THARA BANKING SYSTEM</h1>
-
-<form id="loginForm" class="login-form">
-
-<input
-id="usernameInput"
-type="text"
-placeholder="Username"
-required>
-
-<input
-id="passwordInput"
-type="password"
-placeholder="Password"
-required>
-
-<button type="submit">
-Login
-</button>
-
-</form>
-
-<p
-id="loginMessage"
-class="login-message">
-</p>
-
-<div class="ai-recommend">
-
-<h3>System Status</h3>
-
-<p>🔐 MFA Enabled</p>
-<p>🛡 SOC Active</p>
-<p>📊 Liquidity Monitoring Online</p>
-<p>🌐 ISO 20022 Gateway Ready</p>
-
-</div>
-
-</div>
-
-<!-- ===================================================== -->
-
-<!-- DASHBOARD -->
-
-<!-- ===================================================== -->
-
-<div
-id="summaryBox"
-class="hologram dashboard"
-style="display:none;">
-
-<header class="dashboard-header">
-
-<h2>
-🏦 HUOKAING THARA BANK
-</h2>
-
-<div id="aiStatusBubble">
-AI CORE OFFLINE
-</div>
-
-</header>
-
-<!-- Dashboard Statistics -->
-
-<div
-id="searchContainer"
-class="dashboard-grid">
-</div>
-
-<!-- Phase Navigation -->
-
-<ol
-id="phasesList"
-class="phases-list">
-</ol>
-
-<!-- Phase Content -->
-
-<section
-id="phaseChecklistContainer"
-class="phase-checklist">
-</section>
-
-<div class="dashboard-controls">
-
-<button id="logoutBtn">
-Logout
-</button>
-
-</div>
-
-</div>
-
-<!-- ===================================================== -->
-
-<!-- HEARTBEAT -->
-
-<!-- ===================================================== -->
-
-<div
-id="systemHeartbeat"
-class="heartbeat-indicator">
-</div>
-
-<!-- ===================================================== -->
-
-<!-- SCRIPTS -->
-
-<!-- ===================================================== -->
-
-<script src="js/phase_core.js"></script>
-
-<script src="js/login.js"></script>
-
-<script src="js/master_loader.js"></script>
-
-<script src="js/ai_core.js"></script>
-
-<script src="js/search.js"></script>
-
-<script src="js/security_2fa.js"></script>
-
-<script src="js/soc_defense.js"></script>
-
-<script src="js/bakong_integration.js"></script>
-
-<script src="js/charter_logic.js"></script>
-
-<script src="js/stress_test.js"></script>
-
-<script>
-
-document.addEventListener(
-"bankSystemReady",
-() =>
-{
-const boot =
-document.getElementById("bootScreen");
-
-const status =
-document.getElementById("bootStatus");
-
-status.textContent =
-"All banking modules loaded.";
-
-setTimeout(() =>
-{
-boot.style.display = "none";
-},
-1500);
+    --transition: all .3s ease;
 }
-);
 
-</script>
+/* =========================================================
+   RESET
+========================================================= */
 
-</body>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-</html>
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:
+        "Inter",
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        radial-gradient(circle at top left,
+        rgba(0,229,255,.15),
+        transparent 40%),
+
+        radial-gradient(circle at bottom right,
+        rgba(0,255,136,.12),
+        transparent 40%),
+
+        linear-gradient(
+            135deg,
+            #010409,
+            #07111f,
+            #0f172a
+        );
+
+    color:var(--text-primary);
+
+    min-height:100vh;
+    padding:20px;
+}
+
+/* =========================================================
+   BOOT SCREEN
+========================================================= */
+
+.boot-screen{
+
+    position:fixed;
+    inset:0;
+
+    background:#000;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:99999;
+}
+
+.boot-screen h1{
+
+    color:var(--accent);
+
+    margin-bottom:20px;
+}
+
+#bootStatus{
+    color:#00ff88;
+    font-family:monospace;
+}
+
+/* =========================================================
+   LOGIN CONTAINER
+========================================================= */
+
+.hologram{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    background:var(--bg-panel);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid var(--glass-border);
+
+    border-radius:var(--radius);
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+}
+
+#loginContainer{
+
+    max-width:520px;
+    margin:auto;
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.bank-logo-wrapper{
+
+    display:flex;
+    justify-content:center;
+
+    margin-bottom:25px;
+}
+
+.bank-logo-img{
+
+    width:140px;
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        0 0 25px rgba(0,229,255,.25);
+}
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+h1,h2,h3{
+
+    font-weight:700;
+}
+
+h1{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    color:var(--accent);
+}
+
+h2{
+    color:var(--accent);
+}
+
+p{
+    line-height:1.6;
+}
+
+/* =========================================================
+   LOGIN FORM
+========================================================= */
+
+.login-form{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+.login-form input{
+
+    background:#111827;
+
+    border:1px solid #334155;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:12px;
+}
+
+.login-form input:focus{
+
+    outline:none;
+
+    border-color:var(--accent);
+
+    box-shadow:
+        0 0 10px rgba(0,229,255,.25);
+}
+
+.login-form button{
+
+    background:
+        linear-gradient(
+            135deg,
+            #00e5ff,
+            #00bfff
+        );
+
+    border:none;
+
+    color:black;
+
+    font-weight:700;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+}
+
+.login-form button:hover{
+
+    transform:translateY(-2px);
+}
+
+.login-message{
+
+    margin-top:15px;
+
+    color:var(--accent-red);
+}
+
+/* =========================================================
+   AI PANELS
+========================================================= */
+
+.ai-recommend{
+
+    margin-top:20px;
+
+    padding:15px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:12px;
+}
+
+.ai-recommend h3{
+
+    color:var(--accent-green);
+
+    margin-bottom:10px;
+}
+
+.ai-recommend p{
+
+    font-size:.9rem;
+    margin-bottom:5px;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard{
+
+    width:100%;
+}
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    margin-top:20px;
+}
+
+.card{
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:16px;
+
+    padding:20px;
+
+    text-align:center;
+}
+
+.card h3{
+
+    color:var(--accent);
+    margin-bottom:10px;
+}
+
+.card p{
+
+    font-size:1.6rem;
+    font-weight:bold;
+}
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.dashboard-menu{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:25px;
+}
+
+.dashboard-menu button{
+
+    width:auto;
+
+    background:#111827;
+
+    color:white;
+
+    border:1px solid #334155;
+
+    padding:12px 18px;
+}
+
+.dashboard-menu button:hover{
+
+    background:var(--accent);
+
+    color:black;
+}
+
+/* =========================================================
+   PHASES
+========================================================= */
+
+.phases-list{
+
+    margin-top:30px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(300px,1fr));
+
+    gap:12px;
+
+    list-style:none;
+}
+
+.phases-list li{
+
+    background:#111827;
+
+    border-left:4px solid var(--accent);
+
+    padding:15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
+.phases-list li:hover{
+
+    transform:translateX(5px);
+
+    background:#1e293b;
+}
+
+/* =========================================================
+   PHASE DETAILS
+========================================================= */
+
+.phase-detail-box{
+
+    margin-top:25px;
+
+    padding:25px;
+
+    background:rgba(255,255,255,.03);
+
+    border-radius:14px;
+
+    border:1px solid rgba(255,255,255,.08);
+}
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:15px;
+}
+
+th{
+
+    background:#111827;
+
+    color:var(--accent);
+
+    text-align:left;
+
+    padding:12px;
+}
+
+td{
+
+    padding:12px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.05);
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button{
+
+    transition:var(--transition);
+}
+
+#logoutBtn{
+
+    background:#ff4444;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:10px;
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+#searchContainer{
+
+    margin-top:25px;
+}
+
+/* =========================================================
+   HEARTBEAT
+========================================================= */
+
+.heartbeat-indicator{
+
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    width:15px;
+    height:15px;
+
+    background:#00ff88;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 15px #00ff88;
+
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.5);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--accent);
+
+    border-radius:8px;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:768px){
+
+    .dashboard-menu{
+
+        flex-direction:column;
+    }
+
+    .dashboard-menu button{
+
+        width:100%;
+    }
+
+    .phases-list{
+
+        grid-template-columns:1fr;
+    }
+
+    .hologram{
+
+        padding:20px;
+    }
+}
