@@ -11,40 +11,42 @@
 </head>
 <body>
 
-<!-- ===================================================== -->
-<!-- BOOT SCREEN -->
-<!-- ===================================================== -->
 <div id="bootScreen" class="boot-screen">
     <h1>HUOKAING THARA BANK 1</h1>
     <p id="bootStatus">Initializing Secure Banking Environment...</p>
 </div>
 
-<!-- ===================================================== -->
-<!-- LOGIN CONTAINER -->
-<!-- ===================================================== -->
-<div id="loginContainer" class="hologram">
-    <div class="bank-logo-wrapper">
-        <img src="bank.jpg" alt="Bank Logo" class="bank-logo-img">
+<div id="authView">
+    <div id="loginContainer" class="hologram">
+        <div class="bank-logo-wrapper"><img src="bank.jpg" alt="Logo" class="bank-logo-img"></div>
+        <h1>HUOKAING THARA BANKING SYSTEM 1</h1>
+        <form id="loginForm" class="login-form">
+            <input id="usernameInput" type="text" placeholder="Username" required>
+            <input id="passwordInput" type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="loginMessage" class="login-message"></p>
+        <button onclick="document.getElementById('loginContainer').style.display='none'; document.getElementById('registrationContainer').style.display='block';">Need an account? Register</button>
     </div>
-    <h1>HUOKAING THARA BANKING SYSTEM 1</h1>
-    <form id="loginForm" class="login-form">
-        <input id="usernameInput" type="text" placeholder="Username" required>
-        <input id="passwordInput" type="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
-    <p id="loginMessage" class="login-message"></p>
+
+    <div id="registrationContainer" class="hologram" style="display:none;">
+        <h3>Create New Account</h3>
+        <form id="registrationForm">
+            <input type="text" id="regUsername" placeholder="Choose Username" required>
+            <input type="password" id="regPassword" placeholder="Choose Password" required>
+            <button type="submit">Register Account</button>
+        </form>
+        <p id="regMessage"></p>
+        <button onclick="document.getElementById('registrationContainer').style.display='none'; document.getElementById('loginContainer').style.display='block';">Back to Login</button>
+    </div>
 </div>
 
-<!-- ===================================================== -->
-<!-- DASHBOARD -->
-<!-- ===================================================== -->
 <div id="summaryBox" class="hologram dashboard" style="display:none;">
     <header class="dashboard-header">
         <h2>🏦 HUOKAING THARA BANK 1</h2>
-        <div id="aiStatusBubble">AI CORE OFFLINE</div>
+        <div id="aiStatusBubble">AI CORE ACTIVE</div>
     </header>
 
-    <!-- NEW BANKING MODULES -->
     <div class="balance-card">
         <h3>Current Balance</h3>
         <h1 id="accountBalance">0.00 USD</h1>
@@ -55,7 +57,6 @@
         <div id="transactionList"></div>
     </div>
 
-    <!-- Existing Navigation Modules -->
     <div id="searchContainer" class="dashboard-grid"></div>
     <ol id="phasesList" class="phases-list"></ol>
     <section id="phaseChecklistContainer" class="phase-checklist"></section>
@@ -65,24 +66,10 @@
     </div>
 </div>
 
-    <div id="registrationContainer" class="hologram">
-    <h3>Create New Account</h3>
-    <form id="registrationForm">
-        <input type="text" id="regUsername" placeholder="Choose Username" required>
-        <input type="password" id="regPassword" placeholder="Choose Password" required>
-        <button type="submit">Register Account</button>
-    </form>
-    <p id="regMessage"></p>
-</div>
-
 <script src="js/register.js"></script>
-
-<!-- ===================================================== -->
-<!-- SCRIPTS -->
-<!-- ===================================================== -->
-<!-- Load logic scripts -->
-<script src="js/phase_core.js"></script>
 <script src="js/login.js"></script>
+<script src="js/dashboard_engine.js"></script>
+<script src="js/phase_core.js"></script>
 <script src="js/master_loader.js"></script>
 <script src="js/ai_core.js"></script>
 <script src="js/search.js"></script>
@@ -91,8 +78,6 @@
 <script src="js/bakong_integration.js"></script>
 <script src="js/charter_logic.js"></script>
 <script src="js/stress_test.js"></script>
-<!-- Add your new dashboard logic here -->
-<script src="js/dashboard_engine.js"></script> 
 
 <script>
     document.addEventListener("bankSystemReady", () => {
