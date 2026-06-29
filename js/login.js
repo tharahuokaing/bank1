@@ -51,6 +51,41 @@ const USERS = [
 },
 
 {
+    username: "longlain",
+    password: "dutyfree",
+    role: "Administrator",
+    requires2FA: true
+},
+
+{
+    username: "huo",
+    password: "dutyfree",
+    role: "Chief Executive Officer",
+    requires2FA: true
+},
+
+{
+    username: "khenlyda",
+    password: "dutyfree",
+    role: "Administrator",
+    requires2FA: true
+},
+
+{
+    username: "phaychanrothana",
+    password: "dutyfree",
+    role: "Administrator",
+    requires2FA: true
+},
+
+{
+    username: "chumchanrothanak",
+    password: "dutyfree",
+    role: "Administrator",
+    requires2FA: true
+},
+
+{
     username: "auditor",
     password: "auditor123",
     role: "Auditor",
