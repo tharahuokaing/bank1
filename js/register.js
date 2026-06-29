@@ -52,3 +52,4 @@ const RegistrationModule = {
 };
 
 document.addEventListener("DOMContentLoaded", () => RegistrationModule.init());
+ 
