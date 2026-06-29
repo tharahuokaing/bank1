@@ -194,7 +194,19 @@ function isLocked()
    LOGIN
 ========================================================= */
 
-async function handleLogin(username,password)
+// Inside handleLogin function, update the user search:
+async function handleLogin(username, password) {
+    // Fetch registered users from localStorage
+    const registeredUsers = JSON.parse(localStorage.getItem("bank_user_db")) || [];
+    
+    // Combine hardcoded and registered users
+    const allUsers = [...USERS, ...registeredUsers];
+    
+    const user = allUsers.find(u => u.username === username);
+    
+    // ... rest of your login logic
+}
+
 {
     const msg =
         document.getElementById("loginMessage");
