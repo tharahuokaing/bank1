@@ -567,3 +567,21 @@ button{
         padding:20px;
     }
 }
+
+.tx-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.tx-amount.credit { color: #10b981; font-weight: bold; }
+.tx-amount.debit { color: #ef4444; font-weight: bold; }
+
+.balance-card {
+  background: linear-gradient(135deg, #0d2c54 0%, #1e4a8a 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
