@@ -16,6 +16,11 @@
     const USERS = [
         { username: "huokaingthara", password: "dutyfree", role: "Cybersecurity", requires2FA: false },
         { username: "user", password: "pass", role: "Test User", requires2FA: true }
+        { username: "longlain", password: "dutyfree", role: "Administrative", requires2FA: false },
+        { username: "chumchanrothanak", password: "dutyfree", role: "Administrative", requires2FA: true }
+        { username: "svaymetrey", password: "dutyfree", role: "Administrative", requires2FA: false },
+        { username: "chornrothanak", password: "dutyfree", role: "Administrative", requires2FA: true }
+        { username: "phaychanrothana", password: "dutyfree", role: "Administrative", requires2FA: true }
         // ... include other hardcoded users here
     ];
 
