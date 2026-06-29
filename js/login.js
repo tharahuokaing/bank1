@@ -86,6 +86,13 @@ const USERS = [
 },
 
 {
+    username: "user",
+    password: "pass",
+    role: "Test User",
+    requires2FA: true
+},
+
+{
     username: "auditor",
     password: "auditor123",
     role: "Auditor",
