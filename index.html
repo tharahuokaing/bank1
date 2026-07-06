@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>HUOKAING THARA BANKING SYSTEM 2</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+
+<link rel="stylesheet" href="styles.css">
+
+<link rel="icon" href="bank.jpg">
+
+</head>
+
+<body>
+
+<!-- ===================================================== -->
+
+<!-- BOOT SCREEN -->
+
+<!-- ===================================================== -->
+
+<div id="bootScreen" class="boot-screen">
+
+<h1>HUOKAING THARA BANK 2</h1>
+
+<p id="bootStatus">
+Initializing Secure Banking Environment...
+</p>
+
+</div>
+
+<!-- ===================================================== -->
+
+<!-- LOGIN CONTAINER -->
+
+<!-- ===================================================== -->
+
+<div id="loginContainer" class="hologram">
+
+<div class="bank-logo-wrapper">
+
+<img
+src="bank.jpg"
+alt="Bank Logo"
+class="bank-logo-img">
+
+</div>
+
+<h1>HUOKAING THARA BANKING SYSTEM 2</h1>
+
+<form id="loginForm" class="login-form">
+
+<input
+id="usernameInput"
+type="text"
+placeholder="Username"
+required>
+
+<input
+id="passwordInput"
+type="password"
+placeholder="Password"
+required>
+
+<button type="submit">
+Login
+</button>
+
+</form>
+
+<p
+id="loginMessage"
+class="login-message">
+</p>
+
+<div class="ai-recommend">
+
+<h3>System Status</h3>
+
+<p>🔐 MFA Enabled</p>
+<p>🛡 SOC Active</p>
+<p>📊 Liquidity Monitoring Online</p>
+<p>🌐 ISO 20022 Gateway Ready</p>
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<!-- DASHBOARD -->
+
+<!-- ===================================================== -->
+
+<div
+id="summaryBox"
+class="hologram dashboard"
+style="display:none;">
+
+<header class="dashboard-header">
+
+<h2>
+🏦 HUOKAING THARA BANK 2
+</h2>
+
+<div id="aiStatusBubble">
+AI CORE OFFLINE
+</div>
+
+</header>
+
+<!-- Dashboard Statistics -->
+
+<div
+id="searchContainer"
+class="dashboard-grid">
+</div>
+
+<!-- Phase Navigation -->
+
+<ol
+id="phasesList"
+class="phases-list">
+</ol>
+
+<!-- Phase Content -->
+
+<section
+id="phaseChecklistContainer"
+class="phase-checklist">
+</section>
+
+<div class="dashboard-controls">
+
+<button id="logoutBtn">
+Logout
+</button>
+
+</div>
+
+</div>
+
+<!-- ===================================================== -->
+
+<!-- HEARTBEAT -->
+
+<!-- ===================================================== -->
+
+<div
+id="systemHeartbeat"
+class="heartbeat-indicator">
+</div>
+
+<!-- ===================================================== -->
+
+<!-- SCRIPTS -->
+
+<!-- ===================================================== -->
+
+<script src="js/phase_core.js"></script>
+
+<script src="js/login.js"></script>
+
+<script src="js/master_loader.js"></script>
+
+<script src="js/ai_core.js"></script>
+
+<script src="js/search.js"></script>
+
+<script src="js/security_2fa.js"></script>
+
+<script src="js/soc_defense.js"></script>
+
+<script src="js/bakong_integration.js"></script>
+
+<script src="js/charter_logic.js"></script>
+
+<script src="js/stress_test.js"></script>
+
+<script>
+
+document.addEventListener(
+"bankSystemReady",
+() =>
+{
+const boot =
+document.getElementById("bootScreen");
+
+const status =
+document.getElementById("bootStatus");
+
+status.textContent =
+"All banking modules loaded.";
+
+setTimeout(() =>
+{
+boot.style.display = "none";
+},
+1500);
+}
+);
+
+</script>
+
+<script src="ultra_secure_mode.js"></script>
+
+</body>
+
+</html>
