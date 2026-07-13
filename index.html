@@ -6,7 +6,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     
-    <title>HUOKAING THARA BANKING SYSTEM 2</title>
+    <title>HUOKAING THARA BANK 2</title>
     
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="bank.jpg">
@@ -46,7 +46,7 @@
     <!-- DASHBOARD -->
     <div id="summaryBox" class="hologram dashboard" style="display:none;" role="region" aria-label="Banking Dashboard">
         <header class="dashboard-header">
-            <h2>🏦 HUOKAING THARA BANKING SYSTEM 2</h2>
+            <h2>🏦 HUOKAING THARA BANK 2</h2>
             <div id="aiStatusBubble">AI CORE OFFLINE</div>
         </header>
 
@@ -59,12 +59,13 @@
         </footer>
     </div>
 
-    <!-- HEARTBEAT -->
     <div id="systemHeartbeat" class="heartbeat-indicator" aria-hidden="true"></div>
 
     <!-- SCRIPTS -->
+    <!-- Order matters: Core logic first, UI/Feature scripts second -->
     <script src="js/phase_core.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/account_management.js"></script>
     <script src="js/master_loader.js"></script>
     <script src="js/ai_core.js"></script>
     <script src="js/search.js"></script>
@@ -81,10 +82,10 @@
             const status = document.getElementById("bootStatus");
             
             status.textContent = "All banking modules loaded.";
-            // Smooth fade-out effect
-            boot.style.transition = "opacity 0.5s ease";
-            boot.style.opacity = "0";
-            setTimeout(() => { boot.style.display = "none"; }, 500);
+            setTimeout(() => {
+                boot.style.opacity = "0";
+                setTimeout(() => { boot.style.display = "none"; }, 500);
+            }, 1500);
         });
     </script>
 </body>
