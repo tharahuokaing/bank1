@@ -41,6 +41,12 @@ const USERS = [
     requires2FA: false
   },
   {
+    username: "thorn",
+    password: "thorn",
+    role: "Customer",
+    requires2FA: false
+  },
+  {
     username: "sansopheata",
     password: "sansopheata",
     role: "Chief Executive Officer",
@@ -98,6 +104,24 @@ const USERS = [
     username: "phaychanrothana",
     password: "phaychanrothana",
     role: "Chief Executive Officer",
+    requires2FA: true
+  },
+  {
+    username: "vanneat",
+    password: "vanneat",
+    role: "Customer",
+    requires2FA: true
+  },
+  {
+    username: "mengly",
+    password: "mengly",
+    role: "Customer",
+    requires2FA: true
+  },
+  {
+    username: "leyu",
+    password: "leyu",
+    role: "Customer",
     requires2FA: true
   },
   {
