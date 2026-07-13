@@ -125,6 +125,12 @@ const USERS = [
     requires2FA: true
   },
   {
+    username: "huy",
+    password: "huy",
+    role: "Customer",
+    requires2FA: true
+  },
+  {
     username: "sengchhat",
     password: "sengchhat",
     role: "VIP Customer",
