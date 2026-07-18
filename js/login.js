@@ -1,606 +1,338 @@
 /* ========================================================= 
-   HUOKAING THARA BANKING SYSTEM
-   AUTHENTICATION CONTROLLER v5
-   Enterprise Dashboard Edition
+   HUOKAING THARA BANKING SYSTEM 1
+   AUTHENTICATION CONTROLLER v5.1 (Production Consolidation)
 ========================================================= */
 
 (() => {
+    "use strict";
 
-"use strict";
-
-/* =========================================================
-   CONFIGURATION
-========================================================= */
-
-const CONFIG = {
-    SESSION_KEY: "HT_SESSION",
-    ATTEMPT_KEY: "HT_ATTEMPTS",
-
-    MAX_ATTEMPTS: 5,
-
-    LOCKOUT_MINUTES: 5,
-
-    SESSION_TIMEOUT_MINUTES: 30
-};
-
-/* =========================================================
-   USERS
-========================================================= */
-
-const USERS = [
-  {
-    username: "huokaingthara",
-    password: "huokaingthara",
-    role: "Cybersecurity",
-    requires2FA: false
-  },
-  {
-    username: "thorn",
-    password: "thorn",
-    role: "Customer",
-    requires2FA: false
-  },
-  {
-    username: "thorn",
-    password: "thorn",
-    role: "Customer",
-    requires2FA: false
-  },
-  {
-    username: "sansopheata",
-    password: "sansopheata",
-    role: "Chief Executive Officer",
-    requires2FA: false
-  },
-   {
-    username: "chansamnang",
-    password: "chansamnang",
-    role: "Customer",
-    requires2FA: false
-  },
-   {
-    username: "raem",
-    password: "raem",
-    role: "Customer",
-    requires2FA: false
-  },
-   {
-    username: "sengviseynea",
-    password: "sengviseynea",
-    role: "Chief Executive Officer",
-    requires2FA: false
-  },
-   {
-    username: "somsodavin",
-    password: "somsodavin",
-    role: "Chief Executive Officer",
-    requires2FA: false
-  },
-  {
-    username: "svaymetrey",
-    password: "svaymetrey",
-    role: "Chief Executive Officer",
-    requires2FA: false
-  },
-  {
-    username: "chornrothanak",
-    password: "chornrothanak",
-    role: "Chief Executive Officer",
-    requires2FA: true
-  },
-  {
-    username: "longlain",
-    password: "longlain",
-    role: "Chief Executive Officer",
-    requires2FA: true
-  },
-  {
-    username: "chumchanrothanak",
-    password: "chumchanrothanak",
-    role: "Chief Executive Officer",
-    requires2FA: true
-  },
-  {
-    username: "phaychanrothana",
-    password: "phaychanrothana",
-    role: "Chief Executive Officer",
-    requires2FA: true
-  },
-  {
-    username: "vanneat",
-    password: "vanneat",
-    role: "Customer",
-    requires2FA: true
-  },
-  {
-    username: "mengly",
-    password: "mengly",
-    role: "Customer",
-    requires2FA: true
-  },
-  {
-    username: "leyu",
-    password: "leyu",
-    role: "Customer",
-    requires2FA: true
-  },
-  {
-    username: "huy",
-    password: "huy",
-    role: "Customer",
-    requires2FA: true
-  },
-  {
-    username: "sengchhat",
-    password: "sengchhat",
-    role: "VIP Customer",
-    requires2FA: true
-  }
-];
-   
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-function log(message)
-{
-    console.log(
-        `[AUTH ${new Date().toLocaleTimeString()}] ${message}`
-    );
-}
-
-function generateToken()
-{
-    return crypto.randomUUID();
-}
-
-function saveSession(session)
-{
-    sessionStorage.setItem(
-        CONFIG.SESSION_KEY,
-        JSON.stringify(session)
-    );
-}
-
-function loadSession()
-{
-    const raw =
-        sessionStorage.getItem(CONFIG.SESSION_KEY);
-
-    if (!raw) return null;
-
-    try
-    {
-        return JSON.parse(raw);
-    }
-    catch
-    {
-        return null;
-    }
-}
-
-function destroySession()
-{
-    sessionStorage.removeItem(CONFIG.SESSION_KEY);
-}
-
-/* =========================================================
-   LOGIN ATTEMPTS
-========================================================= */
-
-function getAttempts()
-{
-    return JSON.parse(
-        localStorage.getItem(CONFIG.ATTEMPT_KEY)
-    ) || {
-        count: 0,
-        lockUntil: null
+    /* =========================================================
+       CONFIGURATION
+    ========================================================= */
+    const CONFIG = {
+        SESSION_KEY: "HT_SESSION",
+        ATTEMPT_KEY: "HT_ATTEMPTS",
+        MAX_ATTEMPTS: 5,
+        LOCKOUT_MINUTES: 5,
+        SESSION_TIMEOUT_MINUTES: 30
     };
-}
 
-function saveAttempts(data)
-{
-    localStorage.setItem(
-        CONFIG.ATTEMPT_KEY,
-        JSON.stringify(data)
-    );
-}
-
-function clearAttempts()
-{
-    localStorage.removeItem(CONFIG.ATTEMPT_KEY);
-}
-
-function isLocked()
-{
-    const data = getAttempts();
-
-    if (!data.lockUntil)
-        return false;
-
-    if (Date.now() > data.lockUntil)
-    {
-        clearAttempts();
-        return false;
+    /* =========================================================
+       USERS DB (Hardcoded Mock)
+    ========================================================= */
+    const USERS = [
+        { username: "huokaingthara", password: "huokaingthara", role: "Cybersecurity", requires2FA: false },
+        { username: "test", password: "test", role: "Test Customer", requires2FA: false },
+        { username: "thorn", password: "thorn", role: "Customer", requires2FA: false },
+        { username: "sansopheata", password: "sansopheata", role: "Chief Executive Officer", requires2FA: false },
+        { username: "chansamnang", password: "chansamnang", role: "Customer", requires2FA: false },
+        { username: "raem", password: "raem", role: "Customer", requires2FA: false },
+        { username: "sengviseynea", password: "sengviseynea", role: "Chief Executive Officer", requires2FA: false },
+        { username: "somsodavin", password: "somsodavin", role: "Chief Executive Officer", requires2FA: false },
+        { username: "svaymetrey", password: "svaymetrey", role: "Chief Executive Officer", requires2FA: false },
+        { username: "chornrothanak", password: "chornrothanak", role: "Chief Executive Officer", requires2FA: true },
+        { username: "longlain", password: "longlain", role: "Chief Executive Officer", requires2FA: true },
+        { username: "chumchanrothanak", password: "chumchanrothanak", role: "Chief Executive Officer", requires2FA: true },
+        { username: "phaychanrothana", password: "phaychanrothana", role: "Chief Executive Officer", requires2FA: true },
+        { username: "vanneat", password: "vanneat", role: "Customer", requires2FA: true },
+        { username: "mengly", password: "mengly", role: "Customer", requires2FA: true },
+        { username: "leyu", password: "leyu", role: "Customer", requires2FA: true },
+        { username: "huy", password: "huy", role: "Customer", requires2FA: true },
+        { username: "sengchhat", password: "sengchhat", role: "VIP Customer", requires2FA: true }
+    ];
+   
+    /* =========================================================
+       UTILITIES & SESSION HANDLING
+    ========================================================= */
+    function log(message) {
+        console.log(`[AUTH ${new Date().toLocaleTimeString()}] ${message}`);
     }
 
-    return true;
-}
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-async function handleLogin(username,password)
-{
-    const msg =
-        document.getElementById("loginMessage");
-
-    msg.textContent = "";
-
-    if (!username || !password)
-    {
-        msg.textContent =
-            "Please enter username and password.";
-
-        return;
+    function saveSession(session) {
+        sessionStorage.setItem(CONFIG.SESSION_KEY, JSON.stringify(session));
     }
 
-    if (isLocked())
-    {
-        msg.textContent =
-            "Account temporarily locked.";
-
-        return;
+    function loadSession() {
+        const raw = sessionStorage.getItem(CONFIG.SESSION_KEY);
+        if (!raw) return null;
+        try { return JSON.parse(raw); } catch { return null; }
     }
 
-    const user =
-        USERS.find(
-            u =>
-            u.username === username &&
-            u.password === password
-        );
+    function destroySession() {
+        sessionStorage.removeItem(CONFIG.SESSION_KEY);
+    }
 
-    if (!user)
-    {
+    /* =========================================================
+       RATE LIMITER / LOCKOUT CONTROLLER
+    ========================================================= */
+    function getAttempts() {
+        return JSON.parse(localStorage.getItem(CONFIG.ATTEMPT_KEY)) || { count: 0, lockUntil: null };
+    }
+
+    function saveAttempts(data) {
+        localStorage.setItem(CONFIG.ATTEMPT_KEY, JSON.stringify(data));
+    }
+
+    function clearAttempts() {
+        localStorage.removeItem(CONFIG.ATTEMPT_KEY);
+    }
+
+    function isLocked() {
         const data = getAttempts();
+        if (!data.lockUntil) return false;
+        if (Date.now() > data.lockUntil) {
+            clearAttempts();
+            return false;
+        }
+        return true;
+    }
 
-        data.count++;
+    /* =========================================================
+       AUTHENTICATION CORE LOGIC
+    ========================================================= */
+    async function handleLogin(username, password) {
+        const msg = document.getElementById("loginMessage");
+        if (msg) msg.textContent = "";
 
-        if (data.count >= CONFIG.MAX_ATTEMPTS)
-        {
-            data.lockUntil =
-                Date.now() +
-                CONFIG.LOCKOUT_MINUTES * 60000;
-
-            saveAttempts(data);
-
-            msg.textContent =
-                "Too many failed logins.";
-
+        if (!username || !password) {
+            if (msg) msg.textContent = "Please enter username and password.";
             return;
         }
 
-        saveAttempts(data);
+        if (isLocked()) {
+            if (msg) msg.textContent = "Account temporarily locked.";
+            return;
+        }
 
-        msg.textContent =
-            `Invalid credentials (${data.count}/${CONFIG.MAX_ATTEMPTS})`;
+        const user = USERS.find(u => u.username === username && u.password === password);
 
-        return;
+        if (!user) {
+            const data = getAttempts();
+            data.count++;
+            if (data.count >= CONFIG.MAX_ATTEMPTS) {
+                data.lockUntil = Date.now() + (CONFIG.LOCKOUT_MINUTES * 60000);
+                saveAttempts(data);
+                if (msg) msg.textContent = "Too many failed logins.";
+                return;
+            }
+            saveAttempts(data);
+            if (msg) msg.textContent = `Invalid credentials (${data.count}/${CONFIG.MAX_ATTEMPTS})`;
+            return;
+        }
+
+        clearAttempts();
+
+        // 2FA Security check
+        if (user.requires2FA && typeof start2FA === "function") {
+            start2FA(() => finalizeLogin(user));
+            return;
+        }
+
+        finalizeLogin(user);
     }
 
-    clearAttempts();
+    function finalizeLogin(user) {
+        const session = {
+            username: user.username,
+            role: user.role,
+            token: crypto.randomUUID()
+        };
+        saveSession(session);
+        renderDashboard(session);
+    }
+   
+    /* =========================================================
+       DASHBOARD & VIEW CONTROLLER
+    ========================================================= */
+    function renderDashboard(session) {
+        const login = document.getElementById("loginContainer");
+        const dashboard = document.getElementById("summaryBox");
 
-    if (
-        user.requires2FA &&
-        typeof start2FA === "function"
-    )
-    {
-        start2FA(
-            () => finalizeLogin(user)
-        );
+        if (login) login.style.display = "none";
+        if (dashboard) dashboard.style.display = "block";
 
-        return;
+        updateAIStatus(session);
+        initializeDashboardData();
+        renderDashboardCards();
+        renderPhaseList();
     }
 
-    finalizeLogin(user);
-}
-
-/* =========================================================
-   SUCCESS LOGIN
-========================================================= */
-
-function finalizeLogin(user)
-{
-    const session = {
-
-        username: user.username,
-
-        role: user.role,
-
-        loginTime: Date.now(),
-
-        token: generateToken()
-    };
-
-    saveSession(session);
-
-    renderDashboard(session);
-
-    log(
-        `${user.username} authenticated`
-    );
-}
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function renderDashboard(session)
-{
-    const login =
-        document.getElementById(
-            "loginContainer"
-        );
-
-    const dashboard =
-        document.getElementById(
-            "summaryBox"
-        );
-
-    if (!login || !dashboard)
-        return;
-
-    login.style.display = "none";
-
-    dashboard.style.display = "block";
-
-    updateAIStatus(session);
-
-    renderDashboardCards();
-
-    renderPhaseList();
-}
-
-function updateAIStatus(session)
-{
-    const bubble =
-        document.getElementById(
-            "aiStatusBubble"
-        );
-
-    if (!bubble)
-        return;
-
-    bubble.innerHTML =
-    `
-        AI CORE ONLINE •
-        USER: ${session.username}
-        • ROLE: ${session.role}
-    `;
-}
-
-function renderDashboardCards()
-{
-    const container =
-        document.getElementById(
-            "searchContainer"
-        );
-
-    if (!container)
-        return;
-
-    container.innerHTML =
-    `
-        <div class="dashboard-grid">
-
-            <div class="dashboard-card">
-                <h3>18</h3>
-                <p>Total Phases</p>
-            </div>
-
-            <div class="dashboard-card">
-                <h3>ISO 20022</h3>
-                <p>Compliance</p>
-            </div>
-
-            <div class="dashboard-card">
-                <h3>Bakong</h3>
-                <p>Connected</p>
-            </div>
-
-            <div class="dashboard-card">
-                <h3>SOC</h3>
-                <p>Monitoring</p>
-            </div>
-
-        </div>
-    `;
-}
-
-/* =========================================================
-   PHASES
-========================================================= */
-
-function renderPhaseList()
-{
-    const list =
-        document.getElementById(
-            "phasesList"
-        );
-
-    if (!list)
-        return;
-
-    list.innerHTML = "";
-
-    if (
-        !window.PhaseRegistry ||
-        !PhaseRegistry.getAll
-    )
-    {
-        list.innerHTML =
-            "<li>No phases loaded.</li>";
-
-        return;
+    function initializeDashboardData() {
+        log("Dashboard active. Injecting financial records...");
+        if (document.getElementById("accountCount")) {
+            document.getElementById("accountCount").textContent = "15,000";
+            document.getElementById("depositTotal").textContent = "$252,910,000";
+            document.getElementById("txCount").textContent = "40,000";
+        }
     }
 
-    PhaseRegistry
-        .getAll()
-        .forEach(phase =>
-        {
-            const li =
-                document.createElement("li");
+    function updateAIStatus(session) {
+        const bubble = document.getElementById("aiStatusBubble");
+        if (!bubble) return;
+        bubble.innerHTML = `AI CORE ONLINE • USER: ${session.username} • ROLE: ${session.role}`;
+    }
 
-            li.className =
-                "phase-item";
+    function renderDashboardCards() {
+        const container = document.getElementById("searchContainer");
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px;">
+                
+                <!-- Card 1: Total Accounts -->
+                <div class="dashboard-card">
+                    <img src="total_account.jpg" alt="Accounts Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3 id="accountCount">15,000</h3>
+                    <p>Total Accounts</p>
+                    <a href="https://tharahuokaing.github.io/total_account/" class="card-link">View Details</a>
+                </div>
 
-            li.innerHTML =
-            `
-            ${phase.name}
-            <span>
-            ${phase.status}
-            </span>
-            `;
+                <!-- Card 2: Total Deposits -->
+                <div class="dashboard-card">
+                    <img src="total_deposit.jpg" alt="Deposits Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3 id="depositTotal">$252,910,000</h3>
+                    <p>Total Deposits</p>
+                    <a href="https://tharahuokaing.github.io/deposit/" class="card-link">View Details</a>
+                </div>
 
-            li.onclick = () =>
-            {
-                if (
-                    typeof phase.render ===
-                    "function"
-                )
-                {
-                    phase.render();
-                }
+                <!-- Card 3: Transaction Volumes -->
+                <div class="dashboard-card">
+                    <img src="transaction_volumn.jpg" alt="Transactions Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3 id="txCount">40,000</h3>
+                    <p>Transactions Processed</p>
+                    <a href="https://tharahuokaing.github.io/transaction/" class="card-link">View Log</a>
+                </div>
+
+                <!-- Card 4: System Phases -->
+                <div class="dashboard-card">
+                    <img src="system_phase.jpg" alt="Phases Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3>21</h3>
+                    <p>Total Phases</p>
+                    <a href="https://tharahuokaing.github.io/total_phase/" class="card-link">View Phase Map</a>
+                </div>
+
+                <!-- Card 5: Financial Compliance -->
+                <div class="dashboard-card">
+                    <img src="financial_complaint.jpg" alt="Compliance Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3>ISO 20022</h3>
+                    <p>Compliance Status</p>
+                    <a href="https://tharahuokaing.github.io/financial_compliance/" class="card-link">View Documents</a>
+                </div>
+
+                <!-- Card 6: Interbank Network -->
+                <div class="dashboard-card">
+                    <img src="interbank_network.jpg" alt="Bakong Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3>Bakong</h3>
+                    <p>Connected Gateways</p>
+                    <a href="https://tharahuokaing.github.io/interbank_network/" class="card-link">Gateway Status</a>
+                </div>
+
+                <!-- Card 7: Security Architecture -->
+                <div class="dashboard-card">
+                    <img src="security_architecture.jpg" alt="SOC Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3>SOC</h3>
+                    <p>Monitoring Nodes</p>
+                    <a href="https://tharahuokaing.github.io/security_architecture/" class="card-link">Live Alerts</a>
+                </div>
+
+                <!-- Card 8: Pending Clearings -->
+                <div class="dashboard-card">
+                    <img src="pending_clearing.jpg" alt="Clearing Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3>0</h3>
+                    <p>Pending Clearings</p>
+                    <a href="https://tharahuokaing.github.io/pending_clearing/" class="card-link">Clear Queue</a>
+                </div>
+
+                <!-- Card 9: Active Audits -->
+                <div class="dashboard-card">
+                    <img src="active_audit.jpg" alt="Audits Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3>Passed</h3>
+                    <p>System Audits</p>
+                    <a href="https://tharahuokaing.github.io/active_audit/" class="card-link">Report Vault</a>
+                </div>
+
+                <!-- Card 10: AI Core Status -->
+                <div class="dashboard-card">
+                    <img src="ai_core.jpg" alt="AI Status Icon" class="card-icon" style="width:24px; height:24px;">
+                    <h3>Operational</h3>
+                    <p>AI Core Systems</p>
+                    <a href="https://tharahuokaing.github.io/ai_core/" class="card-link">Core Logs</a>
+                </div>
+
+            </div>
+        `;
+    }
+
+    function renderPhaseList() {
+        const list = document.getElementById("phasesList");
+        if (!list || !window.PhaseRegistry || !PhaseRegistry.getAll) {
+            if (list) list.innerHTML = "<li>No phases loaded.</li>";
+            return;
+        }
+
+        list.innerHTML = "";
+        PhaseRegistry.getAll().forEach(phase => {
+            const li = document.createElement("li");
+            li.className = "phase-item";
+            li.innerHTML = `${phase.name} <span>${phase.status}</span>`;
+            li.onclick = () => {
+                if (typeof phase.render === "function") phase.render();
             };
-
             list.appendChild(li);
         });
-}
+    }
+   
+    /* =========================================================
+       SESSION MANAGEMENT & LIFE CYCLE
+    ========================================================= */
+    function logout() {
+        destroySession();
+        location.reload();
+    }
 
-/* =========================================================
-   LOGOUT
-========================================================= */
+    function restoreSession() {
+        const session = loadSession();
+        if (session) renderDashboard(session);
+    }
 
-function logout()
-{
-    destroySession();
+    function startSessionTimer() {
+        let timeout;
+        const reset = () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                alert("Session expired.");
+                logout();
+            }, CONFIG.SESSION_TIMEOUT_MINUTES * 60000);
+        };
+        document.addEventListener("mousemove", reset);
+        document.addEventListener("keypress", reset);
+        reset();
+    }
 
-    location.reload();
-}
-
-/* =========================================================
-   SESSION RESTORE
-========================================================= */
-
-function restoreSession()
-{
-    const session =
-        loadSession();
-
-    if (!session)
-        return;
-
-    renderDashboard(session);
-}
-
-/* =========================================================
-   SESSION TIMEOUT
-========================================================= */
-
-function startSessionTimer()
-{
-    let timeout;
-
-    const reset = () =>
-    {
-        clearTimeout(timeout);
-
-        timeout =
-        setTimeout(() =>
-        {
-            alert(
-                "Session expired."
-            );
-
-            logout();
-
-        },
-        CONFIG.SESSION_TIMEOUT_MINUTES
-        * 60000);
-    };
-
-    document.addEventListener(
-        "mousemove",
-        reset
-    );
-
-    document.addEventListener(
-        "keypress",
-        reset
-    );
-
-    reset();
-}
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () =>
-    {
-        const form =
-            document.getElementById(
-                "loginForm"
-            );
-
-        if (form)
-        {
-            form.addEventListener(
-                "submit",
-                e =>
-                {
-                    e.preventDefault();
-
-                    handleLogin(
-                        document
-                            .getElementById(
-                                "usernameInput"
-                            )
-                            .value
-                            .trim(),
-
-                        document
-                            .getElementById(
-                                "passwordInput"
-                            )
-                            .value
-                            .trim()
-                    );
-                }
-            );
+    /* =========================================================
+       INITIALIZATION
+    ========================================================= */
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("loginForm");
+        if (form) {
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const userVal = document.getElementById("usernameInput")?.value.trim();
+                const passVal = document.getElementById("passwordInput")?.value.trim();
+                handleLogin(userVal, passVal);
+            });
         }
 
         restoreSession();
-
         startSessionTimer();
 
-        document
-            .getElementById("logoutBtn")
-            ?.addEventListener(
-                "click",
-                logout
-            );
-    }
-);
+        document.getElementById("logoutBtn")?.addEventListener("click", logout);
+    });
 
-/* =========================================================
-   GLOBALS
-========================================================= */
-
-window.logout = logout;
-window.handleLogin = handleLogin;
+    /* =========================================================
+       GLOBALS
+    ========================================================= */
+    window.logout = logout;
+    window.handleLogin = handleLogin;
 
 })();
