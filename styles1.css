@@ -31,10 +31,6 @@
     --shadow: 0 10px 30px rgba(0, 0, 0, .35);
 }
 
-/* =========================================================
-   RESET & SYSTEM LAYOUT
-========================================================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -57,10 +53,6 @@ body {
     padding: 20px;
 }
 
-/* =========================================================
-   BOOT SCREEN
-========================================================= */
-
 .boot-screen {
     position: fixed;
     inset: 0;
@@ -82,10 +74,6 @@ body {
     color: var(--accent-green);
     font-family: monospace;
 }
-
-/* =========================================================
-   HOLOGRAM PLATFORM CONTAINERS
-========================================================= */
 
 .hologram {
     max-width: 1200px;
@@ -116,10 +104,6 @@ body {
     border: 2px solid var(--accent-gold);
     box-shadow: 0 0 25px rgba(0, 229, 255, .25);
 }
-
-/* =========================================================
-   TYPOGRAPHY & DATA STRUCTURES
-========================================================= */
 
 h1, h2, h3 {
     font-weight: 700;
@@ -217,10 +201,6 @@ p {
     margin-top: 5px;
 }
 
-/* =========================================================
-   DASHBOARD LAYER OPTIMIZATIONS (60Hz - 120Hz+)
-   ========================================================= */
-
 .dashboard {
     width: 100%;
     will-change: transform;
@@ -270,10 +250,6 @@ p {
     background: rgba(0, 0, 0, 0.2);
 }
 
-/* =========================================================
-   MENU NAVIGATION & BUTTON ACTIONS
-   ========================================================= */
-
 .dashboard-menu {
     display: flex;
     gap: 10px;
@@ -322,10 +298,6 @@ button:active, .dashboard-menu button:active {
     border: none;
     border-radius: 10px;
 }
-
-/* =========================================================
-   DATA LISTS & DATATABLES
-   ========================================================= */
 
 .phases-list {
     margin-top: 30px;
@@ -381,10 +353,6 @@ td {
     margin-top: 25px;
 }
 
-/* =========================================================
-   AESTHETIC MODULE COMPONETRY
-   ========================================================= */
-
 .qr-placeholder {
     width: 150px;
     height: 150px;
@@ -407,10 +375,6 @@ td {
     height: 40px;
     background: #000;
 }
-
-/* =========================================================
-   ALERTS, RADARS & HIGH PERFORMANCE TOASTS
-   ========================================================= */
 
 #toastContainer {
     position: fixed;
@@ -458,10 +422,6 @@ td {
     50% { transform: scale(1.3) translateZ(0); opacity: 0.6; }
 }
 
-/* =========================================================
-   SYSTEM ACCESSORIES (SCROLLBAR & MEDIA QUERIES)
-   ========================================================= */
-
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -493,3 +453,41 @@ td {
         grid-template-columns: 1fr;
     }
 }
+
+.stats-container {
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center;     /* Centers items vertically */
+    gap: 40px;               /* Adds breathing room between stats */
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #00ffcc; /* Matches your hologram theme */
+    background: rgba(13, 44, 84, 0.3);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;  /* Stacks label on top of value */
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: #a0a0a0;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    color: #00ffcc;
+    margin-top: 5px;
+}
+
+/* Mobile responsive: Stack them if screen is narrow */
+@media (max-width: 600px) {
+    .stats-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
