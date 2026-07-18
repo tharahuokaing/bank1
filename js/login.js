@@ -26,6 +26,7 @@
         { username: "thorn", password: "thorn", role: "Customer", requires2FA: false },
         { username: "sansopheata", password: "sansopheata", role: "Chief Executive Officer", requires2FA: false },
         { username: "chansamnang", password: "chansamnang", role: "Customer", requires2FA: false },
+        { username: "huo", password: "huo", role: "Mr. Huo (Vice President)", requires2FA: false },
         { username: "raem", password: "raem", role: "Customer", requires2FA: false },
         { username: "sengviseynea", password: "sengviseynea", role: "Chief Executive Officer", requires2FA: false },
         { username: "somsodavin", password: "somsodavin", role: "Chief Executive Officer", requires2FA: false },
@@ -38,7 +39,7 @@
         { username: "mengly", password: "mengly", role: "Customer", requires2FA: true },
         { username: "leyu", password: "leyu", role: "Customer", requires2FA: true },
         { username: "huy", password: "huy", role: "Customer", requires2FA: true },
-        { username: "sengchhat", password: "sengchhat", role: "VIP Customer", requires2FA: true }
+        { username: "sengchhat", password: "sengchhat", role: "Director", requires2FA: true }
     ];
    
     /* =========================================================
