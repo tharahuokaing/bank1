@@ -182,7 +182,7 @@
                 <!-- Card 1: Total Accounts -->
                 <div class="dashboard-card">
                     <img src="total_account.jpg" alt="Accounts Icon" class="card-icon" style="width:24px; height:24px;">
-                    <h3 id="accountCount">0</h3>
+                    <h3 id="accountCount">$0</h3>
                     <p>Total Accounts</p>
                     <a href="https://tharahuokaing.github.io/total_account1/" class="card-link">View Details</a>
                 </div>
@@ -198,7 +198,7 @@
                 <!-- Card 3: Transaction Volumes -->
                 <div class="dashboard-card">
                     <img src="transaction_volumn.jpg" alt="Transactions Icon" class="card-icon" style="width:24px; height:24px;">
-                    <h3 id="txCount">0</h3>
+                    <h3 id="txCount">$0</h3>
                     <p>Transactions Processed</p>
                     <a href="https://tharahuokaing.github.io/transaction1/" class="card-link">View Log</a>
                 </div>
