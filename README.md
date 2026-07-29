@@ -1,4 +1,3 @@
-# bank1
 # Huokaing Thara Banking System (Educational Project)
 
 ## Overview

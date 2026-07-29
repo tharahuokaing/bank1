@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    
+    <title>HUOKAING THARA BANK 1</title>
+    
+    <link rel="stylesheet" href="style1.css">
+    <link rel="icon" href="bank.jpg">
+</head>
+<body>
+
+    <!-- Google Translate Widget Container -->
+    <div id="google_translate_element" style="display: inline-block; margin-left: 30px;"></div>
+
+    <!-- BOOT SCREEN -->
+    <div id="bootScreen" class="boot-screen">
+        <h1>HUOKAING THARA BANK 1</h1>
+        <p id="bootStatus">Initializing Secure Banking Environment...</p>
+    </div>
+
+    <!-- LOGIN CONTAINER -->
+    <main id="loginContainer" class="hologram">
+        <div class="bank-logo-wrapper">
+            <img src="bank.jpg" alt="Bank Logo" class="bank-logo-img">
+        </div>
+        <h1>HUOKAING THARA BANKING SYSTEM 2</h1>
+        
+        <form id="loginForm" class="login-form">
+            <input id="usernameInput" type="text" placeholder="Username" required aria-label="Username">
+            <input id="passwordInput" type="password" placeholder="Password" required aria-label="Password">
+            <button type="submit">Login</button>
+        </form>
+
+        <p id="loginMessage" class="login-message" aria-live="polite"></p>
+
+        <section class="ai-recommend">
+            <h3>System Status</h3>
+            <p>🔐 MFA Enabled</p>
+            <p>🛡 SOC Active</p>
+            <p>📊 Liquidity Monitoring Online</p>
+            <p>🌐 ISO 20022 Gateway Ready</p>
+        </section>
+    </main>
+
+    <!-- DASHBOARD -->
+    <div id="summaryBox" class="hologram dashboard" style="display:none;">
+        
+        <!-- Top Management Header with Language Switcher -->
+        <header class="dashboard-header module-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 15px;">
+            <div class="title-area">
+                <h2 data-i18n="title">🏦 HUOKAING THARA BANK 1</h2>
+                <p data-i18n="subtitle" style="font-size: 0.85rem; color: #94a3b8; margin: 0;">Huokaing Thara Banking System • System Monitoring Panel</p>
+            </div>
+            <div class="action-buttons" style="display: flex; gap: 15px; align-items: center;">
+                <button id="refreshDataBtn" class="btn-secondary" data-i18n="refresh" style="background: transparent; border: 1px solid #38bdf8; color: #38bdf8; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold;">Re-Synchronize</button>
+            </div>
+        </header>
+
+        <!-- Stats Overview Row -->
+        <div class="stats-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin: 20px 0; width: 100%; box-sizing: border-box;">
+            <div class="stat-item" style="background: #1e293b; padding: 15px; border-radius: 10px; text-align: center; box-sizing: border-box;">
+                <span class="stat-label" style="color: #94a3b8; font-size: 0.8rem; display: block;">TOTAL ACCOUNTS</span>
+                <span class="stat-value" id="accountCount" style="font-size: 1.4rem; font-weight: bold; display: block; margin-top: 5px; color: #38bdf8;">$0.00</span>
+            </div>
+            <div class="stat-item" style="background: #1e293b; padding: 15px; border-radius: 10px; text-align: center; box-sizing: border-box;">
+                <span class="stat-label" style="color: #94a3b8; font-size: 0.8rem; display: block;" data-i18n="totalCapital">TOTAL DEPOSITS</span>
+                <span class="stat-value" id="depositTotal" style="font-size: 1.4rem; font-weight: bold; display: block; margin-top: 5px; color: #fbbf24;">$0.00</span>
+            </div>
+            <div class="stat-item" style="background: #1e293b; padding: 15px; border-radius: 10px; text-align: center; box-sizing: border-box;">
+                <span class="stat-label" style="color: #94a3b8; font-size: 0.8rem; display: block;">TRANSACTIONS</span>
+                <span class="stat-value" id="txCount" style="font-size: 1.4rem; font-weight: bold; display: block; margin-top: 5px; color: #22c55e;">$0.00</span>
+            </div>
+        </div>
+        
+        <!-- Module and Dynamic Content Area -->
+        <div id="moduleContent"></div>
+        <div id="searchContainer" class="dashboard-grid"></div>
+        <ol id="phasesList" class="phases-list"></ol>
+        <section id="phaseChecklistContainer" class="phase-checklist"></section>
+
+        <!-- Dashboard Footer Controls -->
+        <footer class="dashboard-controls" style="margin-top: 30px; text-align: right;">
+            <button id="logoutBtn" style="background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">Logout</button>
+        </footer>
+    </div>
+
+    <div id="systemHeartbeat" class="heartbeat-indicator" aria-hidden="true"></div>
+
+    <!-- SCRIPTS -->  
+    <script src="js/phase_core.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/account_management.js"></script>
+    <script src="js/master_loader.js"></script>
+    <script src="js/ai_core.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/security_2fa.js"></script>
+    <script src="js/soc_defense.js"></script>
+    <script src="js/bakong_integration.js"></script>
+    <script src="js/charter_logic.js"></script>
+    <script src="js/stress_test.js"></script>
+    <script src="js/ultra_secure_mode.js"></script>
+    <script src="i18n.js"></script>
+    <script src="music.js"></script>
+    <script src="translate.js"></script>
+
+    <script>
+        document.addEventListener("bankSystemReady", () => {
+            const boot = document.getElementById("bootScreen");
+            const status = document.getElementById("bootStatus");
+            
+            status.textContent = "All banking modules loaded.";
+            setTimeout(() => {
+                boot.style.opacity = "0";
+                setTimeout(() => { boot.style.display = "none"; }, 500);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
