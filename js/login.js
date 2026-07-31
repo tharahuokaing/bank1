@@ -215,7 +215,7 @@
 
                 <!-- Card 4: QR Code Scanner -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/qr_scanner/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/bank_scan_upload_qr/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="qr.jpg" alt="QR Scanner Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 50%;">
                         <h3>QR Code</h3>
                         <p>QR Scanner & Upload</p>
