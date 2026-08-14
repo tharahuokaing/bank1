@@ -253,7 +253,7 @@
                         <img src="cryptocurrency.jpg" alt="Crypto Exchange Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 12px;">
                         <h3 style="color: #f0b90b;">Live Markets</h3>
                         <p>Crypto Exchange Overview</p>
-                        <span class="card-link" style="color: #0ecb81;">View 30 Assets</span>
+                        <span class="card-link" style="color: #0ecb81;">View 31 Assets</span>
                     </a>
                 </div>
 
