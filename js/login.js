@@ -21,15 +21,16 @@
        USERS DB (Hardcoded Mock)
     ========================================================= */
     const USERS = [
-        { username: "huokaingthara", password: "huokaingthara", role: "Cybersecurity", requires2FA: false },
+        { username: "huokaingthara", password: "huokaingthara", role: "Chief Cybersecurity Officer", requires2FA: false },
+        { username: "huokaingthara1", password: "huokaingthara1", role: "Head of Marketing", requires2FA: false },
         { username: "jav", password: "jav", role: "Chief of Security", requires2FA: false },
         { username: "nouvichaka", password: "nouvichaka", role: "Chief Credit Officer", requires2FA: false },
         { username: "do", password: "do", role: "VIP Customer", requires2FA: false },
         { username: "sokrachana", password: "sokrachana", role: "VIP Customer", requires2FA: false },
         { username: "sokkhemera", password: "sokkhemera", role: "VIP Customer", requires2FA: false },
-        { username: "jav", password: "jav", role: "VIP Customer", requires2FA: false },
         { username: "dom", password: "dom", role: "VIP Customer", requires2FA: false },
-        { username: "kimmuy", password: "kimmuy", role: "VIP Customer", requires2FA: false },
+        { username: "kimmuy", password: "kimmuy", role: "Secretary", requires2FA: false },
+        { username: "kimmuy", password: "kimmuy", role: "Chief of Customer Service", requires2FA: false }, 
         { username: "kuo", password: "kuo", role: "Customer", requires2FA: false },
         { username: "men", password: "men", role: "Chief Executive Officer", requires2FA: false },
         { username: "man", password: "man", role: "VIP Customer", requires2FA: false },
