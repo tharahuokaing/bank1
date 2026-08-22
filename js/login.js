@@ -197,7 +197,7 @@
                 
                 <!-- Card 1: Total Accounts -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/total_account/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/total_account1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="total_account.jpg" alt="Accounts Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3 id="accountCount">$65,550,000.00</h3>
                         <p>Total Accounts</p>
@@ -207,7 +207,7 @@
 
                 <!-- Card 2: Total Deposits -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/deposit/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/deposit1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="total_deposit.jpg" alt="Deposits Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3 id="depositTotal">$65,550,000.00</h3>
                         <p>Total Deposits</p>
@@ -217,7 +217,7 @@
 
                 <!-- Card 3: Transaction Volumes -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/transaction/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/transaction1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="transaction_volumn.jpg" alt="Transactions Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3 id="txCount">$1,500,000.00</h3>
                         <p>Transactions Processed</p>
@@ -227,7 +227,7 @@
 
                 <!-- Card 4: QR Code Scanner -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/bank_scan_upload_qr/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/bank_scan_upload_qr1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="qr.jpg" alt="QR Scanner Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 50%;">
                         <h3>QR Code</h3>
                         <p>QR Scanner & Upload</p>
@@ -237,7 +237,7 @@
 
                 <!-- Card 5: Legend Cinema Portal -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/cinema/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/cinema1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="cinema.jpg" alt="Cinema Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 50%;">
                         <h3>Cinema</h3>
                         <p>Legend Booking & Pay</p>
@@ -247,7 +247,7 @@
 
                 <!-- Card 6: Withdrawal -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/withdrawal_bank/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/withdrawal_bank1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="withdrawal.jpg" alt="Withdrawal Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 50%;">
                         <h3>Withdrawal</h3>
                         <p>Secure Withdrawal</p>
@@ -257,7 +257,7 @@
 
                 <!-- Card 7: Cryptocurrency Market Overview -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/cryptocurrency/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/cryptocurrency1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="cryptocurrency.jpg" alt="Crypto Exchange Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 12px;">
                         <h3 style="color: #f0b90b;">Live Markets</h3>
                         <p>Crypto Exchange Overview</p>
@@ -268,7 +268,7 @@
 
                 <!-- Card 8: Global Currency Calculator -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/calculator/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/calculator1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="calculator.jpg" alt="Calculator Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 50%;">
                         <h3>Calculator</h3>
                         <p>Global Rate Converter</p>
@@ -279,7 +279,7 @@
 
                 <!-- Card 9: System Phases -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/total_phase/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/total_phase1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="system_phase.jpg" alt="Phases Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3>21</h3>
                         <p>Total Phases</p>
@@ -289,7 +289,7 @@
 
                 <!-- Card 10: Financial Compliance -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/financial_compliance/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/financial_compliance1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="financial_complaint.jpg" alt="Compliance Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3>ISO 20022</h3>
                         <p>Compliance Status</p>
@@ -299,7 +299,7 @@
 
                 <!-- Card 11: Interbank Network -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/interbank_network/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/interbank_network1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="interbank_network.jpg" alt="Bakong Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3>Bakong</h3>
                         <p>Connected Gateways</p>
@@ -309,7 +309,7 @@
 
                 <!-- Card 12: Security Architecture -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/security_architecture/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/security_architecture1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="security_architecture.jpg" alt="SOC Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3>SOC</h3>
                         <p>Monitoring Nodes</p>
@@ -319,7 +319,7 @@
 
                 <!-- Card 13: Pending Clearings -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/pending_clearing/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/pending_clearing1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="pending_clearing.jpg" alt="Clearing Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3>0</h3>
                         <p>Pending Clearings</p>
@@ -329,7 +329,7 @@
 
                 <!-- Card 14: Active Audits -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/active_audit/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/active_audit1/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="active_audit.jpg" alt="Audits Icon" class="card-icon" style="width:150px; height:150px;">
                         <h3>Passed</h3>
                         <p>System Audits</p>
