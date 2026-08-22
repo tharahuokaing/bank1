@@ -23,6 +23,7 @@
     const USERS = [
         { username: "huokaingthara", password: "huokaingthara", role: "Chief Cybersecurity Officer", requires2FA: false },
         { username: "huokaingthara1", password: "huokaingthara1", role: "Head of Marketing", requires2FA: false },
+        { username: "huokaingtharoth", password: "huokaingtharoth", role: "VIP Customer", requires2FA: false },
         { username: "jav", password: "jav", role: "Chief of Security", requires2FA: false },
         { username: "nouvichaka", password: "nouvichaka", role: "Chief Credit Officer", requires2FA: false },
         { username: "do", password: "do", role: "VIP Customer", requires2FA: false },
