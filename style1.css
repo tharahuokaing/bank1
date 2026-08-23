@@ -588,3 +588,67 @@ body {
         font-size: 0.8rem;
     }
 }
+
+/* ================================================================= */
+/* FULL-SCREEN & RESPONSIVE CENTERED LAYOUT (Android & Desktop)      */
+/* ================================================================= */
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #030712;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: center; /* Centers horizontally on desktop */
+  align-items: center;     /* Centers vertically on desktop */
+  overflow-x: hidden;
+}
+
+/* Main Wrapper for Full-Screen Centering */
+.announcement-wrapper {
+  width: 100%;
+  max-width: 1400px;        /* Limits max width on ultra-wide desktop screens */
+  min-height: 100vh;        /* Forces full screen height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Keeps content dead-center vertically */
+  align-items: center;      /* Keeps content dead-center horizontally */
+  padding: 20px;            /* Safe padding boundary for Android screens */
+  box-sizing: border-box;
+}
+
+/* Glass Card Container (Scales cleanly on mobile & desktop) */
+.card-glass {
+  width: 100%;
+  max-width: 1250px;       /* Ideal reading width for desktop */
+  background: rgba(10, 15, 30, 0.92);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-radius: 16px;
+  padding: 30px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.15);
+  box-sizing: border-box;
+}
+
+/* ================================================================= */
+/* MOBILE / ANDROID OPTIMIZATION QUERIES                             */
+/* ================================================================= */
+@media (max-width: 768px) {
+  html, body {
+    align-items: flex-start; /* Allows natural scrolling on mobile screens */
+    padding: 10px;
+  }
+
+  .announcement-wrapper {
+    min-height: auto;
+    padding: 5px;
+    justify-content: flex-start;
+  }
+
+  .card-glass {
+    padding: 15px;
+    border-radius: 10px;
+  }
+}
