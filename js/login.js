@@ -60,6 +60,7 @@
         { username: "sengchhat1", password: "sengchhat1", role: "VIP Customer", requires2FA: true },
         { username: "nita", password: "nita", role: "Secretary", requires2FA: true },
         { username: "khenlyda", password: "khenlyda", role: "Secretary", requires2FA: true },
+        { username: "ban", password: "ban", role: "VIP Customer", requires2FA: true },
         { username: "sengchhat", password: "sengchhat", role: "Director", requires2FA: true }
     ];
    
