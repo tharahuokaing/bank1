@@ -62,6 +62,8 @@
         { username: "khenlyda", password: "khenlyda", role: "Secretary", requires2FA: true },
         { username: "ban", password: "ban", role: "VIP Customer", requires2FA: true },
         { username: "hong", password: "hong", role: "VIP Customer", requires2FA: true },
+        { username: "tong", password: "tong", role: "VIP Customer", requires2FA: true },
+        { username: "mery", password: "mery", role: "VIP Customer", requires2FA: true },
         { username: "sengchhat", password: "sengchhat", role: "Director", requires2FA: true }
     ];
    
