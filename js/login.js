@@ -285,7 +285,7 @@
                     <a href="https://tharahuokaing.github.io/casino2/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="casino_2.jpg" alt="Casino 2 Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 12px;">
                         <h3 style="color: #f0b90b;">Casino 2</h3>
-                        <p>Crypto Exchange Overview</p>
+                        <p>Casino 2</p>
                         <span class="card-link" style="color: #0ecb81;">View 15 Assets</span>
                     </a>
                 </div>
