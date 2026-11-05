@@ -292,7 +292,7 @@
 
                 <!-- Card 9: Citymall Discount Overview -->
                 <div class="dashboard-card">
-                    <a href="https://tharahuokaing.github.io/citymall_discount/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
+                    <a href="https://tharahuokaing.github.io/citymall_discount_system/" style="text-decoration: none; color: inherit; display: block; height: 100%; width: 100%;">
                         <img src="citymall_discount.jpg" alt="Citymall Discount Icon" class="card-icon" style="width:150px; height:150px; object-fit: cover; border-radius: 12px;">
                         <h3 style="color: #f0b90b;">Citymall Discount - Citymall Promo</h3>
                         <p>Get 50% discount for all payments using Huokaing Thara Bank at Citymall Super Market!</p>
